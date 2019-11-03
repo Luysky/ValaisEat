@@ -9,6 +9,8 @@ namespace ValaisEat
             Console.WriteLine("Hello World!");
 
             Console.WriteLine("C'est bien moi !");
+
+            Console.WriteLine("Est-ce que ça marche? ");
         }
     }
 }
