@@ -13,6 +13,8 @@ namespace ValaisEat
             Console.WriteLine("Est-ce que ça marche? ");
 
             Console.WriteLine("Oui ca à l'air!!");
+
+            Console.WriteLine("Après merge");
         }
     }
 }
