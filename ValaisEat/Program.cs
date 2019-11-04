@@ -10,7 +10,7 @@ namespace ValaisEat
 
             Console.WriteLine("C'est bien moi !");
 
-            Console.WriteLine("Oui ca à l'air!");
+            Console.WriteLine("Oui ca à l'air!!");
         }
     }
 }
