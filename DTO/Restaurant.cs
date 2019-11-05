@@ -4,14 +4,15 @@ using System.Text;
 
 namespace DTO
 {
-    public class Countries
+    public class Restaurant
     {
-        public int IdCountry { get; set; }
+        public int IdRestaurant { get; set; }
         public string Name { get; set; }
+        public int IdCity { get; set; }
 
         public override string ToString()
         {
-            return $"{IdCountry}|{Name}";
+            return $"{IdRestaurant}|{Name}|{IdCity}";
         }
     }
 }

@@ -4,16 +4,14 @@ using System.Text;
 
 namespace DTO
 {
-    public class Areas
+    public class Country
     {
-        public int IdArea { get; set; }
-        public string Name { get; set; }
         public int IdCountry { get; set; }
-
+        public string Name { get; set; }
 
         public override string ToString()
         {
-            return $"{IdArea}|{Name}|{IdCountry}";
+            return $"{IdCountry}|{Name}";
         }
     }
 }
