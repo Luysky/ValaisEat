@@ -15,7 +15,7 @@ namespace DAL
                 Configuration = configuration;
             }
 
-            public List<Area> GetHotels()
+            public List<Area> GetAreas()
             {
                 List<Area> results = null;
                 string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -100,7 +100,7 @@ namespace DAL
                 {
                     using (SqlConnection cn = new SqlConnection(connectionString))
                     {
-                        string query = "INSERT INTO Area(iname, idcountry) VALUES(@name, @idcountry); SELECT SCOPE_IDENTITY()";
+                        string query = "INSERT INTO Areas(name, idcountry) VALUES(@name, @idcountry); SELECT SCOPE_IDENTITY()";
                         SqlCommand cmd = new SqlCommand(query, cn);
                         cmd.Parameters.AddWithValue("@name", area.Name);
                         cmd.Parameters.AddWithValue("@idcountry", area.IdCountry);
@@ -128,7 +128,7 @@ namespace DAL
                 {
                     using (SqlConnection cn = new SqlConnection(connectionString))
                     {
-                        string query = "UPDATE Areas SET idArea=@idArea, name=@name, idCountry=@idCountry WHERE idHotel=@id";
+                        string query = "UPDATE Areas SET idArea=@idArea, name=@name, idCountry=@idCountry WHERE idArea=@id";
                         SqlCommand cmd = new SqlCommand(query, cn);
                         cmd.Parameters.AddWithValue("@idArea", area.IdArea);
                         cmd.Parameters.AddWithValue("@name", area.Name);
