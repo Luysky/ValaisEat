@@ -11,7 +11,7 @@ namespace ValaisEat
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Hello World!!");
 
             Console.WriteLine("C'est bien moi !");
 
