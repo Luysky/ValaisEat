@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DAL
 {
-    interface ICitiesDB
+    public interface ICitiesDB
     {
         List<City> GetCities();
         City GetCity(int id);

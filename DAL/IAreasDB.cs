@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DAL
 {
-    interface IAreasDB
+   public interface IAreasDB
     {
         List<Area> GetAreas();
 

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DAL
 {
-    interface ICountriesDB
+    public interface ICountriesDB
     {
         List<Country> GetCountries();
 

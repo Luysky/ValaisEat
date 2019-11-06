@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using DAL;
 using DTO;
+using System.Collections.Generic;
 
-namespace DAL
+namespace BLL
 {
-    public interface ICustomersDB
+    internal interface ICustomersManager
     {
+        ICustomersDB CustomersDbObject { get; }
+
         List<Customer> GetCustomers();
         Customer GetCustomer(int id);
         Customer AddCustomer(Customer customer);
