@@ -156,7 +156,7 @@ namespace DAL
             return result;
         }
 
-        public int DeleteArea(int id)
+        public int DeleteOrderDishes(int id)
         {
             int result = 0;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
