@@ -128,9 +128,9 @@ namespace DAL
                 {
                     using (SqlConnection cn = new SqlConnection(connectionString))
                     {
-                        string query = "UPDATE Areas SET idArea=@idArea, name=@name, idCountry=@idCountry WHERE idArea=@id";
+                        string query = "UPDATE Areas SET name=@name, idCountry=@idCountry WHERE idArea=@id";
                         SqlCommand cmd = new SqlCommand(query, cn);
-                        cmd.Parameters.AddWithValue("@idArea", area.IdArea);
+                        cmd.Parameters.AddWithValue("@id", area.IdArea);
                         cmd.Parameters.AddWithValue("@name", area.Name);
                         cmd.Parameters.AddWithValue("@idCountry", area.IdCountry);
                       

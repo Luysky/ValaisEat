@@ -136,10 +136,10 @@ namespace DAL
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
                    
-                    string query = "UPDATE Orders SET idOrder=@idOrder, idCustomer=@idCustomer, idDeliver=@idDeliver, status=@status, orderPrice=@orderPrice WHERE idOrder=@id";
+                    string query = "UPDATE Orders SET idCustomer=@idCustomer, idDeliver=@idDeliver, status=@status, orderPrice=@orderPrice WHERE idOrder=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                    
-                    cmd.Parameters.AddWithValue("@idOrder", order.IdOrder);
+                    cmd.Parameters.AddWithValue("@id", order.IdOrder);
                     cmd.Parameters.AddWithValue("@idCustomer", order.IdCustomer);
                     cmd.Parameters.AddWithValue("@idDeliver", order.IdDeliver);
                     cmd.Parameters.AddWithValue("@status", order.Status);
