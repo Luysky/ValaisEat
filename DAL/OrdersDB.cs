@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 
 namespace DAL
 {
-    class OrdersDB
+    class OrdersDB :IOrdersDB
     {
 
         public IConfiguration Configuration { get; }
@@ -16,16 +16,16 @@ namespace DAL
             Configuration = configuration;
         }
 
-        public List<Area> GetAreas()
+        public List<Order> GetOrders()
         {
-            List<Area> results = null;
+            List<Order> results = null;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM Areas";
+                    string query = "SELECT * FROM Orders";
                     SqlCommand cmd = new SqlCommand(query, cn);
 
                     cn.Open();
@@ -35,16 +35,18 @@ namespace DAL
                         while (dr.Read())
                         {
                             if (results == null)
-                                results = new List<Area>();
+                                results = new List<Order>();
 
-                            Area areas = new Area();
+                            Order orders = new Order();
 
-                            areas.IdArea = (int)dr["IdArea"];
-                            areas.Name = (string)dr["Name"];
-                            areas.IdCountry = (int)dr["IdCountry"];
+                            orders.IdOrder = (int)dr["IdOrder"];
+                            orders.IdCustomer = (int)dr["IdCustomer"];
+                            orders.IdDeliver = (int)dr["IdDeliver"];
+                            orders.Status = (string)dr["Status"];
+                            orders.OrderPrice = (int)dr["OrderPrice"];
 
 
-                            results.Add(areas);
+                            results.Add(orders);
                         }
                     }
                 }
@@ -57,16 +59,16 @@ namespace DAL
             return results;
         }
 
-        public Area GetArea(int id)
+        public Order GetOrder(int id)
         {
-            Area area = null;
+            Order order = null;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM Areas WHERE IdArea = @id";
+                    string query = "SELECT * FROM Orders WHERE IdOrder = @id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 
@@ -76,11 +78,13 @@ namespace DAL
                     {
                         if (dr.Read())
                         {
-                            area = new Area();
+                            order = new Order();
 
-                            area.IdArea = (int)dr["IdArea"];
-                            area.Name = (string)dr["Name"];
-                            area.IdCountry = (int)dr["IdCountry"];
+                            order.IdOrder = (int)dr["IdOrder"];
+                            order.IdCustomer = (int)dr["IdCustomer"];
+                            order.IdDeliver = (int)dr["IdDeliver"];
+                            order.Status = (string)dr["Status"];
+                            order.OrderPrice = (int)dr["OrderPrice"];
                         }
                     }
                 }
@@ -90,10 +94,10 @@ namespace DAL
                 throw e;
             }
 
-            return area;
+            return order;
         }
 
-        public Area AddArea(Area area)
+        public Order AddOrder(Order order)
         {
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
@@ -101,15 +105,17 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT INTO Areas(name, idcountry) VALUES(@name, @idcountry); SELECT SCOPE_IDENTITY()";
+                    string query = "INSERT INTO Orders(idCustomer, idDeliver, status, orderPrice) VALUES(@idCustomer, @idDeliver, @status, @orderPrice); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@name", area.Name);
-                    cmd.Parameters.AddWithValue("@idcountry", area.IdCountry);
+                    cmd.Parameters.AddWithValue("@idCustomer", order.IdCustomer);
+                    cmd.Parameters.AddWithValue("@idDeliver", order.IdDeliver);
+                    cmd.Parameters.AddWithValue("@status", order.Status);
+                    cmd.Parameters.AddWithValue("@orderPrice", order.OrderPrice);
 
 
                     cn.Open();
 
-                    area.IdArea = Convert.ToInt32(cmd.ExecuteScalar());
+                    order.IdOrder = Convert.ToInt32(cmd.ExecuteScalar());
                 }
             }
             catch (Exception e)
@@ -117,10 +123,10 @@ namespace DAL
                 throw e;
             }
 
-            return area;
+            return order;
         }
 
-        public int UpdateArea(Area area)
+        public int UpdateOrder(Order order)
         {
             int result = 0;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -129,11 +135,15 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE Areas SET idArea=@idArea, name=@name, idCountry=@idCountry WHERE idArea=@id";
+                   
+                    string query = "UPDATE Orders SET idCustomer=@idCustomer, idDeliver=@idDeliver, status=@status, orderPrice=@orderPrice WHERE idOrder=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@idArea", area.IdArea);
-                    cmd.Parameters.AddWithValue("@name", area.Name);
-                    cmd.Parameters.AddWithValue("@idCountry", area.IdCountry);
+                   
+                    cmd.Parameters.AddWithValue("@id", order.IdOrder);
+                    cmd.Parameters.AddWithValue("@idCustomer", order.IdCustomer);
+                    cmd.Parameters.AddWithValue("@idDeliver", order.IdDeliver);
+                    cmd.Parameters.AddWithValue("@status", order.Status);
+                    cmd.Parameters.AddWithValue("@orderPrice", order.OrderPrice);
 
 
                     cn.Open();
@@ -149,7 +159,7 @@ namespace DAL
             return result;
         }
 
-        public int DeleteArea(int id)
+        public int DeleteOrder(int id)
         {
             int result = 0;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -158,7 +168,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "DELETE FROM Areas WHERE idArea=@id";
+                    string query = "DELETE FROM Orders WHERE idOrder=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 

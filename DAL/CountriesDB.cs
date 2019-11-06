@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DAL
 {
-    class CountriesDB
+    class CountriesDB : ICountriesDB
     {
      
      
@@ -130,9 +130,9 @@ namespace DAL
                 {
                     using (SqlConnection cn = new SqlConnection(connectionString))
                     {
-                        string query = "UPDATE Countries SET idCountry=@idCountry, name=@name WHERE idCountry=@id";
+                        string query = "UPDATE Countries SET name=@name WHERE idCountry=@id";
                         SqlCommand cmd = new SqlCommand(query, cn);
-                        cmd.Parameters.AddWithValue("@idCountry", country.IdCountry);
+                        cmd.Parameters.AddWithValue("@id", country.IdCountry);
                         cmd.Parameters.AddWithValue("@name", country.Name);
                      
 

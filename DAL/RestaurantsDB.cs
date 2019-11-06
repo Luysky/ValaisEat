@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DAL
 {
-    class RestaurantsDB
+    class RestaurantsDB : IRestaurantsDB
     {
 
         public IConfiguration Configuration { get; }
@@ -16,16 +16,16 @@ namespace DAL
             Configuration = configuration;
         }
 
-        public List<Area> GetAreas()
+        public List<Restaurant> GetRestaurants()
         {
-            List<Area> results = null;
+            List<Restaurant> results = null;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM Areas";
+                    string query = "SELECT * FROM Restaurants";
                     SqlCommand cmd = new SqlCommand(query, cn);
 
                     cn.Open();
@@ -35,16 +35,16 @@ namespace DAL
                         while (dr.Read())
                         {
                             if (results == null)
-                                results = new List<Area>();
+                                results = new List<Restaurant>();
 
-                            Area areas = new Area();
+                            Restaurant restaurants = new Restaurant();
 
-                            areas.IdArea = (int)dr["IdArea"];
-                            areas.Name = (string)dr["Name"];
-                            areas.IdCountry = (int)dr["IdCountry"];
+                            restaurants.IdRestaurant = (int)dr["IdRestaurant"];
+                            restaurants.Name = (string)dr["Name"];
+                            restaurants.IdCity = (int)dr["IdCity"];
 
 
-                            results.Add(areas);
+                            results.Add(restaurants);
                         }
                     }
                 }
@@ -57,16 +57,16 @@ namespace DAL
             return results;
         }
 
-        public Area GetArea(int id)
+        public Restaurant GetRestaurant(int id)
         {
-            Area area = null;
+            Restaurant restaurant = null;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM Areas WHERE IdArea = @id";
+                    string query = "SELECT * FROM Restaurants WHERE idRestaurant = @id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 
@@ -76,11 +76,11 @@ namespace DAL
                     {
                         if (dr.Read())
                         {
-                            area = new Area();
+                            restaurant = new Restaurant();
 
-                            area.IdArea = (int)dr["IdArea"];
-                            area.Name = (string)dr["Name"];
-                            area.IdCountry = (int)dr["IdCountry"];
+                            restaurant.IdRestaurant = (int)dr["IdRestaurant"];
+                            restaurant.Name = (string)dr["Name"];
+                            restaurant.IdCity = (int)dr["IdCity"];
                         }
                     }
                 }
@@ -90,10 +90,10 @@ namespace DAL
                 throw e;
             }
 
-            return area;
+            return restaurant;
         }
 
-        public Area AddArea(Area area)
+        public Restaurant AddRestaurant(Restaurant restaurant)
         {
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
@@ -101,15 +101,15 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT INTO Areas(name, idcountry) VALUES(@name, @idcountry); SELECT SCOPE_IDENTITY()";
+                    string query = "INSERT INTO Restaurants(name, idCity) VALUES(@name, @idCity); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@name", area.Name);
-                    cmd.Parameters.AddWithValue("@idcountry", area.IdCountry);
+                    cmd.Parameters.AddWithValue("@name", restaurant.Name);
+                    cmd.Parameters.AddWithValue("@idcountry", restaurant.IdCity);
 
 
                     cn.Open();
 
-                    area.IdArea = Convert.ToInt32(cmd.ExecuteScalar());
+                    restaurant.IdRestaurant = Convert.ToInt32(cmd.ExecuteScalar());
                 }
             }
             catch (Exception e)
@@ -117,10 +117,10 @@ namespace DAL
                 throw e;
             }
 
-            return area;
+            return restaurant;
         }
 
-        public int UpdateArea(Area area)
+        public int UpdateRestaurant(Restaurant restaurant)
         {
             int result = 0;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -129,11 +129,11 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE Areas SET idArea=@idArea, name=@name, idCountry=@idCountry WHERE idArea=@id";
+                    string query = "UPDATE Restaurants SET name=@name, idCity=@idCity WHERE idRestaurant=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@idArea", area.IdArea);
-                    cmd.Parameters.AddWithValue("@name", area.Name);
-                    cmd.Parameters.AddWithValue("@idCountry", area.IdCountry);
+                    cmd.Parameters.AddWithValue("@id", restaurant.IdRestaurant);
+                    cmd.Parameters.AddWithValue("@name", restaurant.Name);
+                    cmd.Parameters.AddWithValue("@idCity", restaurant.IdCity);
 
 
                     cn.Open();
@@ -158,7 +158,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "DELETE FROM Areas WHERE idArea=@id";
+                    string query = "DELETE FROM Restaurants WHERE idRestaurants=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 

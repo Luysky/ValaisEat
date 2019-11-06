@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DAL
 {
-    class OrderDishesDB    
+    class OrderDishesDB : IOrderDishesDB
     {
 
         public IConfiguration Configuration { get; }
@@ -16,7 +16,7 @@ namespace DAL
             Configuration = configuration;
         }
 
-        public List<OrderDish> GetOrdersDishes()
+        public List<OrderDish> GetOrderDishes()
         {
             List<OrderDish> results = null;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -136,9 +136,9 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE OrderDishes SET idOrder=@idOrder, idDish=@idDish,quantity=@quantity,orderDishPrice=@orderDishPrice WHERE idOrder=@id";
+                    string query = "UPDATE OrderDishes SET idDish=@idDish,quantity=@quantity,orderDishPrice=@orderDishPrice WHERE idOrder=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@idOrder", orderDish.IdOrder);
+                    cmd.Parameters.AddWithValue("@id", orderDish.IdOrder);
                     cmd.Parameters.AddWithValue("@idDish", orderDish.IdDish);
                     cmd.Parameters.AddWithValue("@quantity", orderDish.Quantity);
                     cmd.Parameters.AddWithValue("@orderDishesPrice", orderDish.OrderDishPrice);
@@ -156,7 +156,7 @@ namespace DAL
             return result;
         }
 
-        public int DeleteArea(int id)
+        public int DeleteOrderDish(int id)
         {
             int result = 0;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -181,8 +181,6 @@ namespace DAL
 
             return result;
         }
-
-
 
     }
 }

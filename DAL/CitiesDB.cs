@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 
 namespace DAL
 {
-    class CitiesDB
+    class CitiesDB : ICitiesDB
     {
         public IConfiguration Configuration { get; }
         public CitiesDB(IConfiguration configuration)
@@ -131,9 +131,9 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE Cities SET idCity=@idCity, name=@name, npa=@npa, idArea=@idArea  WHERE idCity=@id";
+                    string query = "UPDATE Cities SET name=@name, npa=@npa, idArea=@idArea  WHERE idCity=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@idCity", city.IdCity);
+                    cmd.Parameters.AddWithValue("@id", city.IdCity);
                     cmd.Parameters.AddWithValue("@name", city.Name);
                     cmd.Parameters.AddWithValue("@npa", city.Npa);
                     cmd.Parameters.AddWithValue("@idArea", city.IdArea);

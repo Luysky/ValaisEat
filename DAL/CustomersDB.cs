@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DAL
 {
-    class CustomersDB
+    class CustomersDB : ICustomersDB
     {
 
         public IConfiguration Configuration { get; }
@@ -140,9 +140,9 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE Customers SET idCustomer=@idCustomer, name=@name, adresse=@adresse, email=@email ,password=@password, idcity=@idcity  WHERE idCustomer=@id";
+                    string query = "UPDATE Customers SET name=@name, adresse=@adresse, email=@email ,password=@password, idcity=@idcity  WHERE idCustomer=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@idCustomer", customer.IdCustomer);
+                    cmd.Parameters.AddWithValue("@id", customer.IdCustomer);
                     cmd.Parameters.AddWithValue("@name", customer.Name);
                     cmd.Parameters.AddWithValue("@adresse", customer.Adresse);
                     cmd.Parameters.AddWithValue("@email", customer.Email);
@@ -163,7 +163,7 @@ namespace DAL
             return result;
         }
 
-        public int DeleteCustoemr(int id)
+        public int DeleteCustomer(int id)
         {
             int result = 0;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -189,7 +189,6 @@ namespace DAL
             return result;
         }
 
-
-
+       
     }
 }
