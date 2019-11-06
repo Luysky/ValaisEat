@@ -16,7 +16,7 @@ namespace DAL
             Configuration = configuration;
         }
 
-        public List<Dish> GetAreas()
+        public List<Dish> GetDishes()
         {
             List<Dish> results = null;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -76,8 +76,11 @@ namespace DAL
 
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
-                        if (dr.Read())
+                        while (dr.Read())
                         {
+
+                            if (dr.Read())
+                        
                             dish = new Dish();
 
                             dish.IdDish = (int)dr["IdDish"];
