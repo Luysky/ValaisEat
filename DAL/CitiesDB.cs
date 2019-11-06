@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 
 namespace DAL
 {
-    class CitiesDB
+    class CitiesDB : ICitiesDB
     {
         public IConfiguration Configuration { get; }
         public CitiesDB(IConfiguration configuration)

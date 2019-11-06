@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DAL
 {
-    class OrderDishesDB    
+    class OrderDishesDB : IOrderDishesDB
     {
 
         public IConfiguration Configuration { get; }
@@ -16,7 +16,7 @@ namespace DAL
             Configuration = configuration;
         }
 
-        public List<OrderDish> GetOrdersDishes()
+        public List<OrderDish> GetOrderDishes()
         {
             List<OrderDish> results = null;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -156,7 +156,7 @@ namespace DAL
             return result;
         }
 
-        public int DeleteOrderDishes(int id)
+        public int DeleteOrderDish(int id)
         {
             int result = 0;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -181,8 +181,6 @@ namespace DAL
 
             return result;
         }
-
-
 
     }
 }

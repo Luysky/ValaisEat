@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DAL
 {
-    class CustomersDB
+    class CustomersDB : ICustomersDB
     {
 
         public IConfiguration Configuration { get; }
@@ -163,7 +163,7 @@ namespace DAL
             return result;
         }
 
-        public int DeleteCustoemr(int id)
+        public int DeleteCustomer(int id)
         {
             int result = 0;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -189,7 +189,6 @@ namespace DAL
             return result;
         }
 
-
-
+       
     }
 }

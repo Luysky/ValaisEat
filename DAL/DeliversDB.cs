@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DAL
 {
-    class DeliversDB
+    class DeliversDB : IDeliversDB
     {
 
         public IConfiguration Configuration { get; }
@@ -181,7 +181,6 @@ namespace DAL
             return result;
         }
 
-
-
+     
     }
 }
