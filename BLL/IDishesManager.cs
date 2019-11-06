@@ -1,12 +1,13 @@
-﻿using DTO;
-using System;
+﻿using DAL;
+using DTO;
 using System.Collections.Generic;
-using System.Text;
 
-namespace DAL
+namespace BLL
 {
-    public interface IDishesDB
+    internal interface IDishesManager
     {
+        IDishesDB DishesDbObject { get; }
+
         List<Dish> GetDishes();
         Dish GetDish(int id);
         Dish AddDish(Dish dish);

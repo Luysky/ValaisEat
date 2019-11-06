@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DAL
 {
-    interface IRestaurantsDB
+    public interface IRestaurantsDB
     {
         List<Restaurant> GetRestaurants();
         Restaurant GetRestaurant(int id);

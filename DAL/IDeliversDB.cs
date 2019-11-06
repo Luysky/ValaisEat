@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DAL
 {
-    interface IDeliversDB
+    public interface IDeliversDB
     {
         List<Deliver> GetDelivers();
         Deliver GetDeliver(int id);

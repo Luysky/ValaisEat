@@ -1,12 +1,13 @@
-﻿using DTO;
-using System;
+﻿using DAL;
+using DTO;
 using System.Collections.Generic;
-using System.Text;
 
-namespace DAL
+namespace BLL
 {
-    public interface IOrderDishesDB
+    internal interface IOrderDishesManager
     {
+        IOrderDishesDB OrderDishesObject { get; }
+
         List<OrderDish> GetOrderDishes();
         OrderDish GetOrderDish(int id);
         OrderDish AddOrderDish(OrderDish orderDish);
