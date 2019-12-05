@@ -102,7 +102,7 @@ namespace DAL
                 {
                     using (SqlConnection cn = new SqlConnection(connectionString))
                     {
-                        string query = "INSERT INTO Countries(name) VALUES(@name); SELECT SCOPE_IDENTITY()";
+                        string query = "INSERT INTO Countries(Name) VALUES(@name); SELECT SCOPE_IDENTITY()";
                         SqlCommand cmd = new SqlCommand(query, cn);
                         cmd.Parameters.AddWithValue("@name", country.Name);
                        
@@ -130,7 +130,7 @@ namespace DAL
                 {
                     using (SqlConnection cn = new SqlConnection(connectionString))
                     {
-                        string query = "UPDATE Countries SET name=@name WHERE idCountry=@id";
+                        string query = "UPDATE Countries SET Name=@name WHERE IdCountry=@id";
                         SqlCommand cmd = new SqlCommand(query, cn);
                         cmd.Parameters.AddWithValue("@id", country.IdCountry);
                         cmd.Parameters.AddWithValue("@name", country.Name);
@@ -159,7 +159,7 @@ namespace DAL
                 {
                     using (SqlConnection cn = new SqlConnection(connectionString))
                     {
-                        string query = "DELETE FROM Countries WHERE idCountry=@id";
+                        string query = "DELETE FROM Countries WHERE IdCountry=@id";
                         SqlCommand cmd = new SqlCommand(query, cn);
                         cmd.Parameters.AddWithValue("@id", id);
 

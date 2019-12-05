@@ -109,7 +109,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT INTO Customers(name, adresse, email, password, idcity) VALUES(@name, @adresse, @email, @password, @idcity); SELECT SCOPE_IDENTITY()";
+                    string query = "INSERT INTO Customers(Name, Adresse, Email, Password, Idcity) VALUES(@name, @adresse, @email, @password, @idcity); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@name", customer.Name);
                     cmd.Parameters.AddWithValue("@adresse", customer.Adresse);
@@ -140,7 +140,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE Customers SET name=@name, adresse=@adresse, email=@email ,password=@password, idcity=@idcity  WHERE idCustomer=@id";
+                    string query = "UPDATE Customers SET Name=@name, Adresse=@adresse, Email=@email ,Password=@password, Idcity=@idcity  WHERE IdCustomer=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", customer.IdCustomer);
                     cmd.Parameters.AddWithValue("@name", customer.Name);
@@ -172,7 +172,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "DELETE FROM Customers WHERE idCustomer=@id";
+                    string query = "DELETE FROM Customers WHERE IdCustomer=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 

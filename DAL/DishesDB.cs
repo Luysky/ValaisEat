@@ -68,7 +68,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM Dishes WHERE idDish = @id";
+                    string query = "SELECT * FROM Dishes WHERE IdDish = @id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 
@@ -108,7 +108,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT INTO Dishes(name, dishPrice, status, idrestaurant) VALUES(@name, @dishPrice, @status, @idrestaurant); SELECT SCOPE_IDENTITY()";
+                    string query = "INSERT INTO Dishes(Name, DishPrice, Status, Idrestaurant) VALUES(@name, @dishPrice, @status, @idrestaurant); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@name", dish.Name);
                     cmd.Parameters.AddWithValue("@dishPrice", dish.DishPrice);
@@ -139,7 +139,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE Dishes SET name=@name, dishPrice=@dishPrice, status = @status, idRestaurant=@idRestaurant WHERE idDish=@id";
+                    string query = "UPDATE Dishes SET Name=@name, DishPrice=@dishPrice, Status = @status, IdRestaurant=@idRestaurant WHERE IdDish=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", dish.IdDish);
                     cmd.Parameters.AddWithValue("@name", dish.Name);
@@ -170,7 +170,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "DELETE FROM Dishes WHERE idDish=@id";
+                    string query = "DELETE FROM Dishes WHERE IdDish=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 
