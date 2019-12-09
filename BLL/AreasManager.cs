@@ -3,16 +3,33 @@ using System.Collections.Generic;
 using System.Text;
 using DAL;
 using DTO;
+using Microsoft.Extensions.Configuration;
 
 namespace BLL
 {
-    class AreasManager : IAreasManager
-    {
-        public IAreasDB AreasDbObject => throw new NotImplementedException();
 
+    // mettre la class en public
+    // créer un private Ixxx
+    // A supprimer dans IAreas  le Icities truc
+
+
+    public class AreasManager : IAreasManager
+    {
+
+
+        private IAreasDB AreasDbObject { get; }
+
+        
+        public AreasManager (IAreasDB areasDB)
+        {
+            AreasDbObject = areasDB;
+        }
+
+        
         public Area GetArea(int id)
         {
-            throw new NotImplementedException();
+        
+            return AreasDbObject.GetArea(id);
         }
 
         public List<Area> GetAreas()

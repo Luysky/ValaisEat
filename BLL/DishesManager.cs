@@ -6,6 +6,7 @@ using DTO;
 
 namespace BLL
 {
+    
     class DishesManager : IDishesManager
     {
         public IDishesDB DishesDbObject => throw new NotImplementedException();

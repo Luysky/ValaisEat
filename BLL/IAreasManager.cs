@@ -8,8 +8,6 @@ namespace BLL
 {
     internal interface IAreasManager
     {
-        IAreasDB AreasDbObject { get; }
-
         List<Area> GetAreas();
         Area GetArea(int id);
     }

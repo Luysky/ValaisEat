@@ -6,6 +6,8 @@ namespace BLL
 {
     public interface ICitiesManager
     {
+
+        //A supprimer le Icities truc
         ICitiesDB CitiesDbObject { get; }
 
         List<City> GetCities();

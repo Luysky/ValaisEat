@@ -10,6 +10,8 @@ namespace DAL
     public class AreasDB : IAreasDB
     {
             public IConfiguration Configuration { get; }
+
+
             public AreasDB(IConfiguration configuration)
             {
                 Configuration = configuration;
