@@ -20,6 +20,11 @@ namespace BLL
             throw new NotImplementedException();
         }
 
+        public int DeleteOrderDish(int idOrder, int idDish)
+        {
+            throw new NotImplementedException();
+        }
+
         public OrderDish GetOrderDish(int id)
         {
             throw new NotImplementedException();

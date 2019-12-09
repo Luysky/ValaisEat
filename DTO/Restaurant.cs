@@ -8,6 +8,7 @@ namespace DTO
     {
         public int IdRestaurant { get; set; }
         public string Name { get; set; }
+        public string Description { get; set; }
         public int IdCity { get; set; }
 
         public override string ToString()

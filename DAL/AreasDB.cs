@@ -102,7 +102,7 @@ namespace DAL
                 {
                     using (SqlConnection cn = new SqlConnection(connectionString))
                     {
-                        string query = "INSERT INTO Areas(name, idcountry) VALUES(@name, @idcountry); SELECT SCOPE_IDENTITY()";
+                        string query = "INSERT INTO Areas(Name, Idcountry) VALUES(@Name, @Idcountry); SELECT SCOPE_IDENTITY()";
                         SqlCommand cmd = new SqlCommand(query, cn);
                         cmd.Parameters.AddWithValue("@name", area.Name);
                         cmd.Parameters.AddWithValue("@idcountry", area.IdCountry);
@@ -130,7 +130,7 @@ namespace DAL
                 {
                     using (SqlConnection cn = new SqlConnection(connectionString))
                     {
-                        string query = "UPDATE Areas SET name=@name, idCountry=@idCountry WHERE idArea=@id";
+                        string query = "UPDATE Areas SET Name=@name, IdCountry=@idCountry WHERE IdArea=@id";
                         SqlCommand cmd = new SqlCommand(query, cn);
                         cmd.Parameters.AddWithValue("@id", area.IdArea);
                         cmd.Parameters.AddWithValue("@name", area.Name);
@@ -159,7 +159,7 @@ namespace DAL
                 {
                     using (SqlConnection cn = new SqlConnection(connectionString))
                     {
-                        string query = "DELETE FROM Areas WHERE idArea=@id";
+                        string query = "DELETE FROM Areas WHERE IdArea=@id";
                         SqlCommand cmd = new SqlCommand(query, cn);
                         cmd.Parameters.AddWithValue("@id", id);
 

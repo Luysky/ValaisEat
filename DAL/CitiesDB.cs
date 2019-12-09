@@ -102,7 +102,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT INTO Cities(name, npa, idArea) VALUES(@name, @npa, @idArea); SELECT SCOPE_IDENTITY()";
+                    string query = "INSERT INTO Cities(Name, Npa, IdArea) VALUES(@name, @npa, @idArea); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@name", city.Name);
                     cmd.Parameters.AddWithValue("@npa", city.Npa);
@@ -131,7 +131,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE Cities SET name=@name, npa=@npa, idArea=@idArea  WHERE idCity=@id";
+                    string query = "UPDATE Cities SET Name=@name, Npa=@npa, IdArea=@idArea  WHERE IdCity=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", city.IdCity);
                     cmd.Parameters.AddWithValue("@name", city.Name);
@@ -161,7 +161,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "DELETE FROM Cities WHERE idCity=@id";
+                    string query = "DELETE FROM Cities WHERE IdCity=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 

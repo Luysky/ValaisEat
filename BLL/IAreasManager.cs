@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace BLL
 {
-    internal interface IAreasManager
+    public interface IAreasManager
     {
         List<Area> GetAreas();
         Area GetArea(int id);

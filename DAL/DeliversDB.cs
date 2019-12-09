@@ -105,7 +105,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT INTO Delivers(name, phoneNumber, idArea) VALUES(@name, @phoneNumber, @idArea); SELECT SCOPE_IDENTITY()";
+                    string query = "INSERT INTO Delivers(Name, PhoneNumber, IdArea) VALUES(@name, @phoneNumber, @idArea); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@name", deliver.Name);
                     cmd.Parameters.AddWithValue("@adresse", deliver.PhoneNumber);
@@ -134,7 +134,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE Delivers SET name=@name, phoneNumber=@phoneNumber, idArea=@idArea WHERE idDeliver=@id";
+                    string query = "UPDATE Delivers SET Name=@name, PhoneNumber=@phoneNumber, IdArea=@idArea WHERE IdDeliver=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", deliver.IdDeliver);
                     cmd.Parameters.AddWithValue("@name", deliver.Name);
@@ -164,7 +164,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "DELETE FROM Delivers WHERE idDeliver=@id";
+                    string query = "DELETE FROM Delivers WHERE IdDeliver=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 

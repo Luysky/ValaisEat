@@ -105,7 +105,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT INTO Orders(idCustomer, idDeliver, status, orderPrice) VALUES(@idCustomer, @idDeliver, @status, @orderPrice); SELECT SCOPE_IDENTITY()";
+                    string query = "INSERT INTO Orders(IdCustomer, IdDeliver, Status, OrderPrice) VALUES(@idCustomer, @idDeliver, @status, @orderPrice); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@idCustomer", order.IdCustomer);
                     cmd.Parameters.AddWithValue("@idDeliver", order.IdDeliver);
@@ -136,7 +136,7 @@ namespace DAL
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
                    
-                    string query = "UPDATE Orders SET idCustomer=@idCustomer, idDeliver=@idDeliver, status=@status, orderPrice=@orderPrice WHERE idOrder=@id";
+                    string query = "UPDATE Orders SET IdCustomer=@idCustomer, IdDeliver=@idDeliver, Status=@status, OrderPrice=@orderPrice WHERE IdOrder=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                    
                     cmd.Parameters.AddWithValue("@id", order.IdOrder);
@@ -168,7 +168,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "DELETE FROM Orders WHERE idOrder=@id";
+                    string query = "DELETE FROM Orders WHERE IdOrder=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 

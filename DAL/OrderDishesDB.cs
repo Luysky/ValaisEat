@@ -103,20 +103,16 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT INTO OrderDish(Quantity,Price) VALUES(@Quantity,@Price); SELECT SCOPE_IDENTITY()";
+                    string query = "INSERT INTO OrderDish(IdOrder, IdDish, Quantity,Price) VALUES(@IdOrder, @ IdDish, @quantity,@price)";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@Quantity", orderDish.Quantity);
-                    cmd.Parameters.AddWithValue("@Price", orderDish.OrderDishPrice);
+                    cmd.Parameters.AddWithValue("@IdOrder", orderDish.Quantity);
+                    cmd.Parameters.AddWithValue("@IdDish", orderDish.Quantity);
+                    cmd.Parameters.AddWithValue("@quantity", orderDish.Quantity);
+                    cmd.Parameters.AddWithValue("@price", orderDish.OrderDishPrice);
 
 
                     cn.Open();
 
-                    /*
-                     * Ca c'est surement faux, il faut probablement faire une query pour récupérer
-                     * les clés étrangères. A savoir IdOrder et IdDish
-                     * a vérifier pour les autres cas de figure
-                    */
-                    orderDish.IdOrder = Convert.ToInt32(cmd.ExecuteScalar());
                 }
             }
             catch (Exception e)
@@ -136,7 +132,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE OrderDishes SET idDish=@idDish,quantity=@quantity,orderDishPrice=@orderDishPrice WHERE idOrder=@id";
+                    string query = "UPDATE OrderDishes SET IdDish=@idDish,Quantity=@quantity,OrderDishPrice=@orderDishPrice WHERE IdOrder=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", orderDish.IdOrder);
                     cmd.Parameters.AddWithValue("@idDish", orderDish.IdDish);
@@ -156,7 +152,7 @@ namespace DAL
             return result;
         }
 
-        public int DeleteOrderDish(int id)
+        public int DeleteOrderDish(int idOrder)
         {
             int result = 0;
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
@@ -165,9 +161,35 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "DELETE FROM OrderDishes WHERE idOrder=@id";
+                    string query = "DELETE FROM OrderDishes WHERE IdOrder=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@id", idOrder);
+
+                    cn.Open();
+
+                    result = cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return result;
+        }
+        public int DeleteOrderDish(int idOrder, int idDish)
+        {
+            int result = 0;
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "DELETE FROM OrderDishes WHERE IdOrder=@idIdOrder AND IdDish=@IdDish";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@idIdOrder", idOrder);
+                    cmd.Parameters.AddWithValue("@IdDish", idDish);
 
                     cn.Open();
 
