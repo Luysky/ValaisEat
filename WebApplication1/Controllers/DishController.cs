@@ -22,11 +22,11 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-        public ActionResult GetAllDishes()
+       /* public ActionResult GetAllDishes()
         {
             var dishes = DishesManager.GetDishes();
 
-            /* int count = 0;
+             int count = 0;
 
              foreach (var r in restaurants)
              {
@@ -36,10 +36,10 @@ namespace WebApplication1.Controllers
                  }
 
                  count++;
-             }*/
+             }
 
             return View(dishes);
-        }
+        }*/
 
     }
 }
