@@ -6,7 +6,7 @@ namespace BLL
 {
     internal interface IOrdersManager
     {
-        IOrdersDB OrdersDbObject { get; }
+        
 
         List<Order> GetOrders();
         Order GetOrder(int id);

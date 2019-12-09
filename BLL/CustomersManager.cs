@@ -6,33 +6,40 @@ using DTO;
 
 namespace BLL
 {
-    class CustomersManager : ICustomersManager
+    public class CustomersManager : ICustomersManager
     {
-        public ICustomersDB CustomersDbObject => throw new NotImplementedException();
+
+        private ICustomersDB CustomersDbObject { get; }
+
+        public CustomersManager (ICustomersDB customersDB)
+        {
+            CustomersDbObject = customersDB;
+        }
+            
 
         public Customer AddCustomer(Customer customer)
         {
-            throw new NotImplementedException();
+           return CustomersDbObject.AddCustomer(customer);
         }
 
         public int DeleteCustomer(int id)
         {
-            throw new NotImplementedException();
+            return CustomersDbObject.DeleteCustomer(id);
         }
 
         public Customer GetCustomer(int id)
         {
-            throw new NotImplementedException();
+            return CustomersDbObject.GetCustomer(id);
         }
 
         public List<Customer> GetCustomers()
         {
-            throw new NotImplementedException();
+            return CustomersDbObject.GetCustomers();
         }
 
         public int UpdateCustomer(Customer customer)
         {
-            throw new NotImplementedException();
+            return CustomersDbObject.UpdateCustomer(customer);
         }
     }
 }

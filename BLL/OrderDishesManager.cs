@@ -6,18 +6,24 @@ using DTO;
 
 namespace BLL
 {
-    class OrderDishesManager : IOrderDishesManager
+    public class OrderDishesManager : IOrderDishesManager
     {
-        public IOrderDishesDB OrderDishesObject => throw new NotImplementedException();
+        private IOrderDishesDB OrderDishesDbObject { get; }
+
+        public OrderDishesManager (IOrderDishesDB orderDishesDB)
+        {
+            OrderDishesDbObject = orderDishesDB;
+        }
+
 
         public OrderDish AddOrderDish(OrderDish orderDish)
         {
-            throw new NotImplementedException();
+            return OrderDishesDbObject.AddOrderDish(orderDish);
         }
 
         public int DeleteOrderDish(int id)
         {
-            throw new NotImplementedException();
+            return OrderDishesDbObject.DeleteOrderDish(id);
         }
 
         public int DeleteOrderDish(int idOrder, int idDish)
@@ -27,17 +33,17 @@ namespace BLL
 
         public OrderDish GetOrderDish(int id)
         {
-            throw new NotImplementedException();
+            return OrderDishesDbObject.GetOrderDish(id);
         }
 
         public List<OrderDish> GetOrderDishes()
         {
-            throw new NotImplementedException();
+            return OrderDishesDbObject.GetOrderDishes();
         }
 
         public int UpdateOrderDish(OrderDish orderDish)
         {
-            throw new NotImplementedException();
+            return OrderDishesDbObject.UpdateOrderDish(orderDish);
         }
     }
 }

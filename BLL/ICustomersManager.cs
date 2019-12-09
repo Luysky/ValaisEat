@@ -6,7 +6,7 @@ namespace BLL
 {
     internal interface ICustomersManager
     {
-        ICustomersDB CustomersDbObject { get; }
+        
 
         List<Customer> GetCustomers();
         Customer GetCustomer(int id);

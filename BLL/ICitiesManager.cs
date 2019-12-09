@@ -8,7 +8,7 @@ namespace BLL
     {
 
         //A supprimer le Icities truc
-        ICitiesDB CitiesDbObject { get; }
+        //ICitiesDB CitiesDbObject { get; }
 
         List<City> GetCities();
         City GetCity(int id);

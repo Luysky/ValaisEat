@@ -8,16 +8,26 @@ namespace BLL
     public class CitiesManager : ICitiesManager
 
     {
-        public ICitiesDB CitiesDbObject => throw new NotImplementedException();
+
+        private ICitiesDB CitiesDbObject { get; }
+
+
+        public CitiesManager(ICitiesDB citiesDB)
+        {
+            CitiesDbObject = citiesDB;
+        }
+
 
         public List<City> GetCities()
         {
-            throw new NotImplementedException();
+            return CitiesDbObject.GetCities();
         }
 
         public City GetCity(int id)
         {
-            throw new NotImplementedException();
+           
+            return CitiesDbObject.GetCity(id);
+            
         }
     }
 }

@@ -6,18 +6,26 @@ using DTO;
 
 namespace BLL
 {
-    class CountriesManager : ICountriesManager
+    public class CountriesManager : ICountriesManager
     {
-        public ICountriesDB CountriesDbObject => throw new NotImplementedException();
 
+        private ICountriesDB CountriesDbObject { get; }
+
+        public CountriesManager (ICountriesDB countriesDB)
+        {
+            CountriesDbObject = countriesDB;
+        }
+
+        
         public List<Country> GetCountries()
         {
-            throw new NotImplementedException();
+            return CountriesDbObject.GetCountries();
         }
+        
 
         public Country GetCountry(int id)
         {
-            throw new NotImplementedException();
+            return CountriesDbObject.GetCountry(id);
         }
     }
 }

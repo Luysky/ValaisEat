@@ -7,33 +7,41 @@ using DTO;
 namespace BLL
 {
     
-    class DishesManager : IDishesManager
+    public class DishesManager : IDishesManager
     {
-        public IDishesDB DishesDbObject => throw new NotImplementedException();
+
+        private IDishesDB DishesDbObject { get; }
+
+
+        public DishesManager(IDishesDB dishesDB)
+        {
+            DishesDbObject = dishesDB;
+        }
+
 
         public Dish AddDish(Dish dish)
         {
-            throw new NotImplementedException();
+            return DishesDbObject.AddDish(dish);
         }
 
         public int DeleteDish(int id)
         {
-            throw new NotImplementedException();
+            return DishesDbObject.DeleteDish(id);
         }
 
         public Dish GetDish(int id)
         {
-            throw new NotImplementedException();
+            return DishesDbObject.GetDish(id);
         }
 
         public List<Dish> GetDishes()
         {
-            throw new NotImplementedException();
+            return DishesDbObject.GetDishes();
         }
 
         public int UpdateDish(Dish dish)
         {
-            throw new NotImplementedException();
+            return DishesDbObject.UpdateDish(dish);
         }
     }
 }

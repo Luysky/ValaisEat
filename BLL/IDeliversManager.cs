@@ -6,7 +6,7 @@ namespace BLL
 {
     internal interface IDeliversManager
     {
-        IDeliversDB DeliversDbObject { get; }
+       
 
         List<Deliver> GetDelivers();
         Deliver GetDeliver(int id);

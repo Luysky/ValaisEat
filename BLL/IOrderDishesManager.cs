@@ -6,7 +6,7 @@ namespace BLL
 {
     internal interface IOrderDishesManager
     {
-        IOrderDishesDB OrderDishesObject { get; }
+     
 
         List<OrderDish> GetOrderDishes();
         OrderDish GetOrderDish(int id);

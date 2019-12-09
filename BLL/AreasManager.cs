@@ -34,7 +34,8 @@ namespace BLL
 
         public List<Area> GetAreas()
         {
-            throw new NotImplementedException();
+            return AreasDbObject.GetAreas();
+            
         }
     }
 }

@@ -9,23 +9,22 @@ namespace BLL
 {
     public class RestaurantsManager : IRestaurantsManager
     {
-        public IRestaurantsDB RestaurantsDbObject { get; }
+        private IRestaurantsDB RestaurantsDbObject { get; }
 
-        public RestaurantsManager(IConfiguration Configuration)
+        public RestaurantsManager(IRestaurantsDB restaurantsDB)
         {
-            RestaurantsDbObject = new RestaurantsDB(Configuration);
+            RestaurantsDbObject = restaurantsDB;
         }
 
-        //public IRestaurantsDB RestaurantsDbObjects => throw new NotImplementedException();
 
         public Restaurant GetRestaurant(int id)
         {
-            throw new NotImplementedException();
+            return RestaurantsDbObject.GetRestaurant(id);
         }
 
         public List<Restaurant> GetRestaurants()
         {
-            throw new NotImplementedException();
+            return RestaurantsDbObject.GetRestaurants();
         }
     }
 }

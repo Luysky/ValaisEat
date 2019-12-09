@@ -6,18 +6,24 @@ using DTO;
 
 namespace BLL
 {
-    class DeliversManager : IDeliversManager
+    public class DeliversManager : IDeliversManager
     {
-        public IDeliversDB DeliversDbObject => throw new NotImplementedException();
+
+        private IDeliversDB DeliversDbObject { get; }
+
+        public DeliversManager (IDeliversDB deliversDB)
+        {
+            DeliversDbObject = deliversDB;
+        }
 
         public Deliver GetDeliver(int id)
         {
-            throw new NotImplementedException();
+            return DeliversDbObject.GetDeliver(id);
         }
 
         public List<Deliver> GetDelivers()
         {
-            throw new NotImplementedException();
+            return DeliversDbObject.GetDelivers();
         }
     }
 }

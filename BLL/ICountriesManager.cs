@@ -6,7 +6,7 @@ namespace BLL
 {
     internal interface ICountriesManager
     {
-        ICountriesDB CountriesDbObject { get; }
+        
 
         List<Country> GetCountries();
 

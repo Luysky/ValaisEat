@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DAL
 {
-    class CountriesDB : ICountriesDB
+    public class CountriesDB : ICountriesDB
     {
      
      

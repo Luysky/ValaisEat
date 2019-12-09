@@ -6,33 +6,41 @@ using DTO;
 
 namespace BLL
 {
-    class OrdersManager : IOrdersManager
+    public class OrdersManager : IOrdersManager
     {
-        public IOrdersDB OrdersDbObject => throw new NotImplementedException();
+
+        private IOrdersDB OrdersDbObject { get; }
+
+        public OrdersManager (IOrdersDB ordersDB)
+        {
+            OrdersDbObject = ordersDB;
+        }
+
+        
 
         public Order AddOrder(Order order)
         {
-            throw new NotImplementedException();
+            return OrdersDbObject.AddOrder(order);
         }
 
         public int DeleteOrder(int id)
         {
-            throw new NotImplementedException();
+            return OrdersDbObject.DeleteOrder(id);
         }
 
         public Order GetOrder(int id)
         {
-            throw new NotImplementedException();
+            return OrdersDbObject.GetOrder(id);
         }
 
         public List<Order> GetOrders()
         {
-            throw new NotImplementedException();
+            return OrdersDbObject.GetOrders();
         }
 
         public int UpdateOrder(Order order)
         {
-            throw new NotImplementedException();
+            return OrdersDbObject.UpdateOrder(order);
         }
     }
 }

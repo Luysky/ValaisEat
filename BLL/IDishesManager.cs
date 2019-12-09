@@ -6,7 +6,7 @@ namespace BLL
 {
     internal interface IDishesManager
     {
-        IDishesDB DishesDbObject { get; }
+     
 
         List<Dish> GetDishes();
         Dish GetDish(int id);
