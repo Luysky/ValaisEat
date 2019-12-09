@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DAL
 {
-    class OrderDishesDB : IOrderDishesDB
+    public class OrderDishesDB : IOrderDishesDB
     {
 
         public IConfiguration Configuration { get; }
@@ -15,17 +15,18 @@ namespace DAL
         {
             Configuration = configuration;
         }
+        protected string connectionString = "Server=153.109.124.35;Database=ValaisEatDespair;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=true";
 
         public List<OrderDish> GetOrderDishes()
         {
             List<OrderDish> results = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+           
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM OrderDishes";
+                    string query = "SELECT * FROM OrderDish";
                     SqlCommand cmd = new SqlCommand(query, cn);
 
                     cn.Open();
@@ -61,13 +62,13 @@ namespace DAL
         public OrderDish GetOrderDish(int id)
         {
             OrderDish orderDish = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM OrderDishes WHERE IdOrder = @id";
+                    string query = "SELECT * FROM OrderDish WHERE IdOrder = @id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 
@@ -97,7 +98,7 @@ namespace DAL
 
         public OrderDish AddOrderDish(OrderDish orderDish)
         {
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+        
 
             try
             {
@@ -126,13 +127,13 @@ namespace DAL
         public int UpdateOrderDish(OrderDish orderDish)
         {
             int result = 0;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+          
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE OrderDishes SET IdDish=@idDish,Quantity=@quantity,OrderDishPrice=@orderDishPrice WHERE IdOrder=@id";
+                    string query = "UPDATE OrderDish SET IdDish=@idDish,Quantity=@quantity,OrderDishPrice=@orderDishPrice WHERE IdOrder=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", orderDish.IdOrder);
                     cmd.Parameters.AddWithValue("@idDish", orderDish.IdDish);
@@ -155,13 +156,13 @@ namespace DAL
         public int DeleteOrderDish(int idOrder)
         {
             int result = 0;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+           
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "DELETE FROM OrderDishes WHERE IdOrder=@id";
+                    string query = "DELETE FROM OrderDish WHERE IdOrder=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", idOrder);
 
@@ -180,13 +181,13 @@ namespace DAL
         public int DeleteOrderDish(int idOrder, int idDish)
         {
             int result = 0;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+   
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "DELETE FROM OrderDishes WHERE IdOrder=@idIdOrder AND IdDish=@IdDish";
+                    string query = "DELETE FROM OrderDish WHERE IdOrder=@idIdOrder AND IdDish=@IdDish";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@idIdOrder", idOrder);
                     cmd.Parameters.AddWithValue("@IdDish", idDish);

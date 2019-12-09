@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DAL
 {
-    class DishesDB : IDishesDB
+    public class DishesDB : IDishesDB
     {
 
         public IConfiguration Configuration { get; }
@@ -15,17 +15,18 @@ namespace DAL
         {
             Configuration = configuration;
         }
+        protected string connectionString = "Server=153.109.124.35;Database=ValaisEatDespair;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=true";
 
         public List<Dish> GetDishes()
         {
             List<Dish> results = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+          
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM Dishes";
+                    string query = "SELECT * FROM Dish";
                     SqlCommand cmd = new SqlCommand(query, cn);
 
                     cn.Open();
@@ -62,13 +63,13 @@ namespace DAL
         public Dish GetDish(int id)
         {
             Dish dish = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM Dishes WHERE IdDish = @id";
+                    string query = "SELECT * FROM Dish WHERE IdDish = @id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 
@@ -102,13 +103,13 @@ namespace DAL
 
         public Dish AddDish(Dish dish)
         {
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT INTO Dishes(Name, DishPrice, Status, Idrestaurant) VALUES(@name, @dishPrice, @status, @idrestaurant); SELECT SCOPE_IDENTITY()";
+                    string query = "INSERT INTO Dish(Name, DishPrice, Status, Idrestaurant) VALUES(@name, @dishPrice, @status, @idrestaurant); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@name", dish.Name);
                     cmd.Parameters.AddWithValue("@dishPrice", dish.DishPrice);
@@ -133,13 +134,13 @@ namespace DAL
         public int UpdateDish(Dish dish)
         {
             int result = 0;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+           
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE Dishes SET Name=@name, DishPrice=@dishPrice, Status = @status, IdRestaurant=@idRestaurant WHERE IdDish=@id";
+                    string query = "UPDATE Dish SET Name=@name, DishPrice=@dishPrice, Status = @status, IdRestaurant=@idRestaurant WHERE IdDish=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", dish.IdDish);
                     cmd.Parameters.AddWithValue("@name", dish.Name);
@@ -164,13 +165,13 @@ namespace DAL
         public int DeleteDish(int id)
         {
             int result = 0;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+         
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "DELETE FROM Dishes WHERE IdDish=@id";
+                    string query = "DELETE FROM Dish WHERE IdDish=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 
