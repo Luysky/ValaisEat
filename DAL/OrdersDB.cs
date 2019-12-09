@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 
 namespace DAL
 {
-    class OrdersDB :IOrdersDB
+    public class OrdersDB :IOrdersDB
     {
 
         public IConfiguration Configuration { get; }
@@ -15,17 +15,18 @@ namespace DAL
         {
             Configuration = configuration;
         }
+        protected string connectionString = "Server=153.109.124.35;Database=ValaisEatDespair;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=true";
 
         public List<Order> GetOrders()
         {
             List<Order> results = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+         
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM Orders";
+                    string query = "SELECT * FROM Order";
                     SqlCommand cmd = new SqlCommand(query, cn);
 
                     cn.Open();
@@ -62,13 +63,13 @@ namespace DAL
         public Order GetOrder(int id)
         {
             Order order = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+          
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM Orders WHERE IdOrder = @id";
+                    string query = "SELECT * FROM Order WHERE IdOrder = @id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 
@@ -99,13 +100,13 @@ namespace DAL
 
         public Order AddOrder(Order order)
         {
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+      
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT INTO Orders(IdCustomer, IdDeliver, Status, OrderPrice) VALUES(@idCustomer, @idDeliver, @status, @orderPrice); SELECT SCOPE_IDENTITY()";
+                    string query = "INSERT INTO Order(IdCustomer, IdDeliver, Status, OrderPrice) VALUES(@idCustomer, @idDeliver, @status, @orderPrice); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@idCustomer", order.IdCustomer);
                     cmd.Parameters.AddWithValue("@idDeliver", order.IdDeliver);
@@ -129,14 +130,14 @@ namespace DAL
         public int UpdateOrder(Order order)
         {
             int result = 0;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
                    
-                    string query = "UPDATE Orders SET IdCustomer=@idCustomer, IdDeliver=@idDeliver, Status=@status, OrderPrice=@orderPrice WHERE IdOrder=@id";
+                    string query = "UPDATE Order SET IdCustomer=@idCustomer, IdDeliver=@idDeliver, Status=@status, OrderPrice=@orderPrice WHERE IdOrder=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                    
                     cmd.Parameters.AddWithValue("@id", order.IdOrder);
@@ -162,13 +163,13 @@ namespace DAL
         public int DeleteOrder(int id)
         {
             int result = 0;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+          
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "DELETE FROM Orders WHERE IdOrder=@id";
+                    string query = "DELETE FROM Order WHERE IdOrder=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 

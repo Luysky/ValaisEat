@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DAL
 {
-    class CustomersDB : ICustomersDB
+    public class CustomersDB : ICustomersDB
     {
 
         public IConfiguration Configuration { get; }
@@ -25,7 +25,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM Customers";
+                    string query = "SELECT * FROM Customer";
                     SqlCommand cmd = new SqlCommand(query, cn);
 
                     cn.Open();
@@ -71,7 +71,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM Customers WHERE IdCustomer = @id";
+                    string query = "SELECT * FROM Customer WHERE IdCustomer = @id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 
@@ -109,7 +109,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT INTO Customers(Name, Adresse, Email, Password, Idcity) VALUES(@name, @adresse, @email, @password, @idcity); SELECT SCOPE_IDENTITY()";
+                    string query = "INSERT INTO Customer(Name, Adresse, Email, Password, Idcity) VALUES(@name, @adresse, @email, @password, @idcity); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@name", customer.Name);
                     cmd.Parameters.AddWithValue("@adresse", customer.Adresse);
@@ -140,7 +140,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE Customers SET Name=@name, Adresse=@adresse, Email=@email ,Password=@password, Idcity=@idcity  WHERE IdCustomer=@id";
+                    string query = "UPDATE Customer SET Name=@name, Adresse=@adresse, Email=@email ,Password=@password, Idcity=@idcity  WHERE IdCustomer=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", customer.IdCustomer);
                     cmd.Parameters.AddWithValue("@name", customer.Name);
@@ -172,7 +172,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "DELETE FROM Customers WHERE IdCustomer=@id";
+                    string query = "DELETE FROM Customer WHERE IdCustomer=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 

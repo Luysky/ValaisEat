@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DAL
 {
-    class DeliversDB : IDeliversDB
+    public class DeliversDB : IDeliversDB
     {
 
         public IConfiguration Configuration { get; }
@@ -15,17 +15,18 @@ namespace DAL
         {
             Configuration = configuration;
         }
+        protected string connectionString = "Server=153.109.124.35;Database=ValaisEatDespair;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=true";
 
         public List<Deliver> GetDelivers()
         {
             List<Deliver> results = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+          
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM Delivers";
+                    string query = "SELECT * FROM Deliver";
                     SqlCommand cmd = new SqlCommand(query, cn);
 
                     cn.Open();
@@ -63,13 +64,13 @@ namespace DAL
         public Deliver GetDeliver(int id)
         {
             Deliver deliver = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+        
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM Delivers WHERE idDeliver = @id";
+                    string query = "SELECT * FROM Deliver WHERE idDeliver = @id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 
@@ -99,13 +100,13 @@ namespace DAL
 
         public Deliver AddDeliver(Deliver deliver)
         {
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+           
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT INTO Delivers(Name, PhoneNumber, IdArea) VALUES(@name, @phoneNumber, @idArea); SELECT SCOPE_IDENTITY()";
+                    string query = "INSERT INTO Deliver(Name, PhoneNumber, IdArea) VALUES(@name, @phoneNumber, @idArea); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@name", deliver.Name);
                     cmd.Parameters.AddWithValue("@adresse", deliver.PhoneNumber);
@@ -128,13 +129,13 @@ namespace DAL
         public int UpdateDeliver(Deliver deliver)
         {
             int result = 0;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+          
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE Delivers SET Name=@name, PhoneNumber=@phoneNumber, IdArea=@idArea WHERE IdDeliver=@id";
+                    string query = "UPDATE Deliver SET Name=@name, PhoneNumber=@phoneNumber, IdArea=@idArea WHERE IdDeliver=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", deliver.IdDeliver);
                     cmd.Parameters.AddWithValue("@name", deliver.Name);
@@ -158,13 +159,13 @@ namespace DAL
         public int DeleteDeliver(int id)
         {
             int result = 0;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "DELETE FROM Delivers WHERE IdDeliver=@id";
+                    string query = "DELETE FROM Deliver WHERE IdDeliver=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 

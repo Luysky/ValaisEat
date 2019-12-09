@@ -17,16 +17,18 @@ namespace WebApplication1.Controllers
             AreaManager = areasManager;
         }
 
+      
         // GET: Area
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: Area/Details/5
+        // GET: Area/Select/5
         public ActionResult Select(int id)
         {
-            return View();
+            HttpContext.Session.SetInt32("idArea", id);
+            return RedirectToAction("GetAllCities", "City");
         }
 
         public ActionResult GetAllAreas() {

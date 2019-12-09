@@ -7,24 +7,25 @@ using System.Data.SqlClient;
 
 namespace DAL
 {
-    class CitiesDB : ICitiesDB
+    public class CitiesDB : ICitiesDB
     {
         public IConfiguration Configuration { get; }
         public CitiesDB(IConfiguration configuration)
         {
             Configuration = configuration;
         }
+        protected string connectionString = "Server=153.109.124.35;Database=ValaisEatDespair;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=true";
 
         public List<City> GetCities()
         {
             List<City> results = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+             
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM Cities";
+                    string query = "SELECT * FROM City";
                     SqlCommand cmd = new SqlCommand(query, cn);
 
                     cn.Open();
@@ -60,13 +61,13 @@ namespace DAL
         public City GetCity(int id)
         {
             City city = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM Cities WHERE IdCity = @id";
+                    string query = "SELECT * FROM City WHERE IdArea = @id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 
@@ -96,13 +97,13 @@ namespace DAL
 
         public City AddCity(City city)
         {
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+           
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT INTO Cities(Name, Npa, IdArea) VALUES(@name, @npa, @idArea); SELECT SCOPE_IDENTITY()";
+                    string query = "INSERT INTO City(Name, Npa, IdArea) VALUES(@name, @npa, @idArea); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@name", city.Name);
                     cmd.Parameters.AddWithValue("@npa", city.Npa);
@@ -125,13 +126,13 @@ namespace DAL
         public int UpdateCity(City city)
         {
             int result = 0;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE Cities SET Name=@name, Npa=@npa, IdArea=@idArea  WHERE IdCity=@id";
+                    string query = "UPDATE City SET Name=@name, Npa=@npa, IdArea=@idArea  WHERE IdCity=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", city.IdCity);
                     cmd.Parameters.AddWithValue("@name", city.Name);
@@ -155,13 +156,13 @@ namespace DAL
         public int DeleteCity(int id)
         {
             int result = 0;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+           
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "DELETE FROM Cities WHERE IdCity=@id";
+                    string query = "DELETE FROM City WHERE IdCity=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 

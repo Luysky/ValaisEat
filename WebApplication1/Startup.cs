@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BLL;
+using DAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -31,7 +33,13 @@ namespace WebApplication1
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
+            services.AddSession();
+            services.AddScoped<IAreasManager, AreasManager>();
+            services.AddScoped<IAreasDB, AreasDB>();
+            services.AddScoped<ICitiesManager, CitiesManager>();
+            services.AddScoped<ICitiesDB, CitiesDB>();
+            services.AddScoped<IRestaurantsManager, RestaurantsManager>();
+            services.AddScoped<IRestaurantsDB, RestaurantsDB>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -48,6 +56,7 @@ namespace WebApplication1
                 app.UseHsts();
             }
 
+            app.UseSession();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();

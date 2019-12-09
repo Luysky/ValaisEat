@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 namespace BLL
 {
-    internal interface IDishesManager
+    public interface IDishesManager
     {
-     
+        
 
         List<Dish> GetDishes();
         Dish GetDish(int id);
