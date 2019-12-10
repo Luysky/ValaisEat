@@ -15,9 +15,9 @@ namespace DAL
         {
             Configuration = configuration;
         }
-        protected string connectionString = "Server=153.109.124.35;Database=ValaisEatDespair;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=true";
+        string connectionString = "Server=153.109.124.35;Database=ValaisEatDespair;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=true";
 
-        public List<Dish> GetDishes()
+        public List<Dish> GetDishes(int id)
         {
             List<Dish> results = null;
           
@@ -26,8 +26,9 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM Dish";
+                    string query = "SELECT * FROM Dish WHERE IdRestaurant = @id";
                     SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@id", id);
 
                     cn.Open();
 

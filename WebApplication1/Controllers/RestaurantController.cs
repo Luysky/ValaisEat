@@ -30,18 +30,7 @@ namespace WebApplication1.Controllers
 
         public ActionResult GetAllRestaurants()
         {
-            var restaurants = RestaurantsManager.GetRestaurants();
-           /* int count = 0;
-
-            foreach (var r in restaurants)
-            {
-                if (r.IdCity != HttpContext.Session.GetInt32("idCity"))
-                {
-                    restaurants.RemoveAt(count);
-                }
-
-                count++;
-            }*/
+            var restaurants = RestaurantsManager.GetRestaurants((int)HttpContext.Session.GetInt32("idCity"));
 
             return View(restaurants);
         }

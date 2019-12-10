@@ -8,7 +8,7 @@ namespace BLL
     {
         
 
-        List<Restaurant> GetRestaurants();
+        List<Restaurant> GetRestaurants(int id);
         Restaurant GetRestaurant(int id);
 
     }

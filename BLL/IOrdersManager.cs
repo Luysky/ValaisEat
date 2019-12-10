@@ -4,11 +4,11 @@ using System.Collections.Generic;
 
 namespace BLL
 {
-    internal interface IOrdersManager
+    public interface IOrdersManager
     {
         
 
-        List<Order> GetOrders();
+        List<Order> GetOrders(int id);
         Order GetOrder(int id);
         Order AddOrder(Order order);
         int UpdateOrder(Order order);

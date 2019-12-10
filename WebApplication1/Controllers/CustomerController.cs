@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using BLL;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
@@ -79,16 +80,16 @@ namespace WebApplication.Controllers
             return View();
         }
 
-        [HttpGet]
-        public ActionResult LoginC(string email, string password)
+        [HttpPost]
+        public ActionResult LoginC(Login l)
         {
             var customers = CustomerManager.GetCustomers();
             foreach (var c in customers)
             {
-                var test = CustomerManager.IsUserValid(c, email);
+                var test = CustomerManager.IsUserValid(c, l.Email);
                 if (test == true)
                 {
-                    if (c.Password == password)
+                    if (c.Password == l.Password)
                     {
                         HttpContext.Session.SetInt32("idCustomer", c.IdCustomer);
                         return RedirectToAction("GetAllAreas", "Areas");

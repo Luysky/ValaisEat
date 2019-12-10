@@ -22,9 +22,9 @@ namespace BLL
             return RestaurantsDbObject.GetRestaurant(id);
         }
 
-        public List<Restaurant> GetRestaurants()
+        public List<Restaurant> GetRestaurants(int id)
         {
-            return RestaurantsDbObject.GetRestaurants();
+            return RestaurantsDbObject.GetRestaurants(id);
         }
     }
 }

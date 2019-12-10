@@ -7,7 +7,7 @@ namespace DAL
 {
     public interface IOrdersDB
     {
-        List<Order> GetOrders();
+        List<Order> GetOrders(int id);
         Order GetOrder(int id);
         Order AddOrder(Order order);
         int UpdateOrder(Order order);

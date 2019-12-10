@@ -33,9 +33,9 @@ namespace BLL
             return OrdersDbObject.GetOrder(id);
         }
 
-        public List<Order> GetOrders()
+        public List<Order> GetOrders(int id)
         {
-            return OrdersDbObject.GetOrders();
+            return OrdersDbObject.GetOrders(id);
         }
 
         public int UpdateOrder(Order order)

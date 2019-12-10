@@ -10,7 +10,7 @@ namespace BLL
         //A supprimer le Icities truc
         //ICitiesDB CitiesDbObject { get; }
 
-        List<City> GetCities();
+        List<City> GetCities(int id);
         City GetCity(int id);
     }
 }

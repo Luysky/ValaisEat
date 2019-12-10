@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using BLL;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
@@ -24,7 +25,7 @@ namespace WebApplication.Controllers
         }
 
         // GET: Deliver/Details/5
-        public ActionResult Details(int id)
+      /*  public ActionResult Details(int id)
         {
             return View();
         }
@@ -81,27 +82,28 @@ namespace WebApplication.Controllers
             return View();
         }
 
-        // POST: Deliver/Delete/5
-        [HttpPost]
+       */
+        [HttpGet]
         [ValidateAntiForgeryToken]
+
         public ActionResult LoginD()
         {
 
             return View();
         }
 
-        [HttpGet]
-        public ActionResult LoginD(string email, string password)
+        [HttpPost]
+        public ActionResult LoginD(Login l)
         {
             var customers = DeliverManager.GetDelivers();
             foreach (var d in customers)
             {
-                var test = DeliverManager.IsUserValid(d, email);
+                var test = DeliverManager.IsUserValid(d, l.Email);
                 if (test == true)
                 {
-                    if (d.Password == password)
+                    if (d.Password == l.Password)
                     {
-                        HttpContext.Session.SetInt32("idCustomer", d.IdDeliver);
+                        HttpContext.Session.SetInt32("idDeliver", d.IdDeliver);
                         return RedirectToAction("GetAllAreas", "Areas");
                     }
                 }

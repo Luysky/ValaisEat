@@ -18,9 +18,9 @@ namespace BLL
         }
 
 
-        public List<City> GetCities()
+        public List<City> GetCities(int id)
         {
-            return CitiesDbObject.GetCities();
+            return CitiesDbObject.GetCities(id);
         }
 
         public City GetCity(int id)

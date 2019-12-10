@@ -25,25 +25,14 @@ namespace WebApplication1.Controllers
         // GET: City/Details/5
         public ActionResult Select(int id)
         {
-            HttpContext.Session.SetInt32("idRestaurant", id);
+            HttpContext.Session.SetInt32("idCity", id);
             return RedirectToAction("GetAllRestaurants", "Restaurant");
         }
 
         public ActionResult GetAllCities()
         {
-            var cities = CityManager.GetCities();
-            //int count = 0;
-            
-
-           /* foreach (var c in Tab) {
-                if (c.IdArea != HttpContext.Session.GetInt32("idArea"))
-                {
-                    Tab.RemoveAt(count);
-                }
-               
-                count++;
-
-            }*/
+            var cities = CityManager.GetCities((int)HttpContext.Session.GetInt32("idArea"));
+           
 
             return View(cities);
         }

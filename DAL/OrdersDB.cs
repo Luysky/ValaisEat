@@ -17,7 +17,7 @@ namespace DAL
         }
         protected string connectionString = "Server=153.109.124.35;Database=ValaisEatDespair;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=true";
 
-        public List<Order> GetOrders()
+        public List<Order> GetOrders(int id)
         {
             List<Order> results = null;
          
@@ -26,8 +26,9 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM Order";
+                    string query = "SELECT * FROM Order WHERE IdDeliver = @id";
                     SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@id", id);
 
                     cn.Open();
 

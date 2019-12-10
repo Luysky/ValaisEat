@@ -10,10 +10,10 @@ namespace WebApplication1.Controllers
 {
     public class DishController : Controller
     {
-        private IDishesManager DishesManager { get; }
+        private IDishesManager DishManager { get; }
         public DishController(IDishesManager dishesManager)
         {
-            DishesManager = dishesManager;
+            DishManager = dishesManager;
         }
         // GET: Dish
         public ActionResult Index()
@@ -30,7 +30,7 @@ namespace WebApplication1.Controllers
         public ActionResult GetAllDishes()
         {
             
-            var dishes = DishesManager.GetDishes();
+            var dishes = DishManager.GetDishes((int)HttpContext.Session.GetInt32("idCity"));
 
 
             return View(dishes);
