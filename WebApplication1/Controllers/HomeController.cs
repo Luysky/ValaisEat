@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using BLL;
+using DTO;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Models;
 
@@ -10,6 +13,8 @@ namespace WebApplication1.Controllers
 {
     public class HomeController : Controller
     {
+        private ICustomersManager CustomerManager { get; }
+
         public IActionResult Index()
         {
             return View();
@@ -34,11 +39,34 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-        public IActionResult Customers()
+        public IActionResult Customers(Login l)
         {
+            /*
             ViewData["Message"] = "Veuillez vous identifier";
 
             return View();
+            */
+
+
+            //C'est GetCustomers qui a un problème. C'est vide ou je sais pas quoi. 
+            var customers = CustomerManager.GetCustomers();
+            foreach (var c in customers)
+            {
+                var test = CustomerManager.IsUserValid(c, l.Username);
+                if (test == true)
+                {
+                    if (c.Password == l.Password)
+                    {
+                        HttpContext.Session.SetInt32("idCustomer", c.IdCustomer);
+                        return RedirectToAction("GetAllAreas", "Areas");
+                    }
+                }
+
+            }
+
+
+            return View();
+
 
         }
 

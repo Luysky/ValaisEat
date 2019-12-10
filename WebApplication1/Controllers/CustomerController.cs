@@ -74,15 +74,18 @@ namespace WebApplication.Controllers
                 return View();
             }
         }
-
+        
         public ActionResult LoginC() {
 
             return View();
         }
+        
 
         [HttpPost]
         public ActionResult LoginC(Login l)
         {
+            
+
             var customers = CustomerManager.GetCustomers();
             foreach (var c in customers)
             {
@@ -97,6 +100,7 @@ namespace WebApplication.Controllers
                 }
                
             }
+            
 
             return View();
             
