@@ -10,6 +10,11 @@ namespace WebApplication1.Controllers
 {
     public class DishController : Controller
     {
+        private IDishesManager DishesManager { get; }
+        public DishController(IDishesManager dishesManager)
+        {
+            DishesManager = dishesManager;
+        }
         // GET: Dish
         public ActionResult Index()
         {
@@ -22,24 +27,15 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-       /* public ActionResult GetAllDishes()
+        public ActionResult GetAllDishes()
         {
+            
             var dishes = DishesManager.GetDishes();
 
-             int count = 0;
-
-             foreach (var r in restaurants)
-             {
-                 if (r.IdCity != HttpContext.Session.GetInt32("idCity"))
-                 {
-                     restaurants.RemoveAt(count);
-                 }
-
-                 count++;
-             }
 
             return View(dishes);
-        }*/
+        }
+
 
     }
 }

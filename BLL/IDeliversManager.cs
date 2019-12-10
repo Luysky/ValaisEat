@@ -4,11 +4,12 @@ using System.Collections.Generic;
 
 namespace BLL
 {
-    internal interface IDeliversManager
+    public interface IDeliversManager
     {
        
 
         List<Deliver> GetDelivers();
         Deliver GetDeliver(int id);
+        bool IsUserValid(Deliver d, string email);
     }
 }

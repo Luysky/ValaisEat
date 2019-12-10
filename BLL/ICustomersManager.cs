@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace BLL
 {
-    internal interface ICustomersManager
+    public interface ICustomersManager
     {
         
 
@@ -13,6 +13,8 @@ namespace BLL
         Customer AddCustomer(Customer customer);
         int UpdateCustomer(Customer customer);
         int DeleteCustomer(int id);
+
+        bool IsUserValid(Customer c, string email);
 
     }
 }

@@ -41,5 +41,10 @@ namespace BLL
         {
             return CustomersDbObject.UpdateCustomer(customer);
         }
+
+        public bool IsUserValid(Customer c, string email)
+        {
+            return CustomersDbObject.IsUserValid(c, email);
+        }
     }
 }

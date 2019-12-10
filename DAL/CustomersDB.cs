@@ -15,11 +15,13 @@ namespace DAL
         {
             Configuration = configuration;
         }
+        string connectionString = "Server=153.109.124.35;Database=ValaisEatDespair;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=true";
+
 
         public List<Customer> GetCustomers()
         {
             List<Customer> results = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            
 
             try
             {
@@ -65,7 +67,7 @@ namespace DAL
         public Customer GetCustomer(int id)
         {
             Customer customer = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            
 
             try
             {
@@ -103,7 +105,6 @@ namespace DAL
 
         public Customer AddCustomer(Customer customer)
         {
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             try
             {
@@ -134,7 +135,7 @@ namespace DAL
         public int UpdateCustomer(Customer customer)
         {
             int result = 0;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            
 
             try
             {
@@ -166,7 +167,7 @@ namespace DAL
         public int DeleteCustomer(int id)
         {
             int result = 0;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+           
 
             try
             {
@@ -189,6 +190,19 @@ namespace DAL
             return result;
         }
 
-       
+        public bool IsUserValid(Customer c, string email)
+        {
+            if (c.Email == email)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            
+        }
+
+
     }
 }

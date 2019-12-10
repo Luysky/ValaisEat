@@ -10,6 +10,9 @@ namespace DTO
         public string Name { get; set; }
         public int PhoneNumber { get; set; }
         public int IdArea { get; set; }
+        public string Email { get; set; }
+
+        public string Password { get; set; }
 
         public override string ToString()
         {

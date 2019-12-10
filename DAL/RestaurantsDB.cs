@@ -16,16 +16,18 @@ namespace DAL
             Configuration = configuration;
         }
 
+        string connectionString = "Server=153.109.124.35;Database=ValaisEatDespair;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=true";
+
         public List<Restaurant> GetRestaurants()
         {
             List<Restaurant> results = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+           
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM Restaurants";
+                    string query = "SELECT * FROM Restaurant";
                     SqlCommand cmd = new SqlCommand(query, cn);
 
                     cn.Open();
@@ -41,7 +43,7 @@ namespace DAL
 
                             restaurants.IdRestaurant = (int)dr["IdRestaurant"];
                             restaurants.Name = (string)dr["Name"];
-                            restaurants.Description = (string)dr["Description"];
+                            restaurants.Description = (string)dr["Descritption"];
                             restaurants.IdCity = (int)dr["IdCity"];
 
 
@@ -61,13 +63,13 @@ namespace DAL
         public Restaurant GetRestaurant(int id)
         {
             Restaurant restaurant = null;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM Restaurants WHERE IdRestaurant = @id";
+                    string query = "SELECT * FROM Restaurant WHERE IdRestaurant = @id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 
@@ -97,13 +99,13 @@ namespace DAL
 
         public Restaurant AddRestaurant(Restaurant restaurant)
         {
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+           
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT INTO Restaurants(Name, Description, IdCity) VALUES(@name, @descripton, @idCity); SELECT SCOPE_IDENTITY()";
+                    string query = "INSERT INTO Restaurant(Name, Description, IdCity) VALUES(@name, @descripton, @idCity); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@name", restaurant.Name);
                     cmd.Parameters.AddWithValue("@description", restaurant.Description);
@@ -126,13 +128,13 @@ namespace DAL
         public int UpdateRestaurant(Restaurant restaurant)
         {
             int result = 0;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+         
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE Restaurants SET Name=@name, Description=@description, IdCity=@idCity WHERE IdRestaurant=@id";
+                    string query = "UPDATE Restaurant SET Name=@name, Description=@description, IdCity=@idCity WHERE IdRestaurant=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", restaurant.IdRestaurant);
                     cmd.Parameters.AddWithValue("@name", restaurant.Name);
@@ -155,13 +157,13 @@ namespace DAL
         public int DeleteRestaurant(int id)
         {
             int result = 0;
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+           
 
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "DELETE FROM Restaurants WHERE IdRestaurants=@id";
+                    string query = "DELETE FROM Restaurant WHERE IdRestaurants=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 

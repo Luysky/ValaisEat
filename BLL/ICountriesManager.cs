@@ -7,7 +7,6 @@ namespace BLL
     internal interface ICountriesManager
     {
         
-
         List<Country> GetCountries();
 
         Country GetCountry(int id);

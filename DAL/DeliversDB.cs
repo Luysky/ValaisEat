@@ -44,6 +44,8 @@ namespace DAL
                             delivers.Name = (string)dr["Name"];
                             delivers.PhoneNumber = (int)dr["PhoneNumber"];
                             delivers.IdArea = (int)dr["IdArea"];
+                            delivers.Email = (string)dr["Email"];
+                            delivers.Password = (string)dr["Password"];
 
 
                             results.Add(delivers);
@@ -86,6 +88,8 @@ namespace DAL
                             deliver.Name = (string)dr["Name"];
                             deliver.PhoneNumber = (int)dr["PhoneNumber"];
                             deliver.IdArea = (int)dr["IdArea"];
+                            deliver.Email = (string)dr["Email"];
+                            
                         }
                     }
                 }
@@ -106,11 +110,12 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT INTO Deliver(Name, PhoneNumber, IdArea) VALUES(@name, @phoneNumber, @idArea); SELECT SCOPE_IDENTITY()";
+                    string query = "INSERT INTO Deliver(Name, PhoneNumber, IdArea, Email) VALUES(@name, @phoneNumber, @idArea, @email); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@name", deliver.Name);
                     cmd.Parameters.AddWithValue("@adresse", deliver.PhoneNumber);
                     cmd.Parameters.AddWithValue("@idArea", deliver.IdArea);
+                    cmd.Parameters.AddWithValue("@email", deliver.Email);
 
 
                     cn.Open();
@@ -135,12 +140,13 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE Deliver SET Name=@name, PhoneNumber=@phoneNumber, IdArea=@idArea WHERE IdDeliver=@id";
+                    string query = "UPDATE Deliver SET Name=@name, PhoneNumber=@phoneNumber, IdArea=@idArea, Email=@email WHERE IdDeliver=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", deliver.IdDeliver);
                     cmd.Parameters.AddWithValue("@name", deliver.Name);
                     cmd.Parameters.AddWithValue("@phoneNumber", deliver.PhoneNumber);
                     cmd.Parameters.AddWithValue("@idArea", deliver.IdArea);
+                    cmd.Parameters.AddWithValue("@email", deliver.Email);
 
 
                     cn.Open();
@@ -182,6 +188,19 @@ namespace DAL
             return result;
         }
 
-     
+        public bool IsUserValid(Deliver d, string email)
+        {
+            if (d.Email == email)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
+
     }
 }

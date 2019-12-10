@@ -17,16 +17,18 @@ namespace DAL
                 Configuration = configuration;
             }
 
+            string connectionString = "Server=153.109.124.35;Database=ValaisEatDespair;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=true";
+
             public List<Area> GetAreas()
             {
                 List<Area> results = null;
-                string connectionString = Configuration.GetConnectionString("DefaultConnection");
+              
 
                 try
                 {
                     using (SqlConnection cn = new SqlConnection(connectionString))
                     {
-                        string query = "SELECT * FROM Areas";
+                        string query = "SELECT * FROM Area";
                         SqlCommand cmd = new SqlCommand(query, cn);
 
                         cn.Open();
@@ -61,13 +63,13 @@ namespace DAL
             public Area GetArea(int id)
             {
                 Area area = null;
-                string connectionString = Configuration.GetConnectionString("DefaultConnection");
+                
 
                 try
                 {
                     using (SqlConnection cn = new SqlConnection(connectionString))
                     {
-                        string query = "SELECT * FROM Areas WHERE IdArea = @id";
+                        string query = "SELECT * FROM Area WHERE IdArea = @id";
                         SqlCommand cmd = new SqlCommand(query, cn);
                         cmd.Parameters.AddWithValue("@id", id);
 
@@ -96,13 +98,13 @@ namespace DAL
 
             public Area AddArea(Area area)
             {
-                string connectionString = Configuration.GetConnectionString("DefaultConnection");
+                
 
                 try
                 {
                     using (SqlConnection cn = new SqlConnection(connectionString))
                     {
-                        string query = "INSERT INTO Areas(Name, Idcountry) VALUES(@Name, @Idcountry); SELECT SCOPE_IDENTITY()";
+                        string query = "INSERT INTO Area(Name, Idcountry) VALUES(@Name, @Idcountry); SELECT SCOPE_IDENTITY()";
                         SqlCommand cmd = new SqlCommand(query, cn);
                         cmd.Parameters.AddWithValue("@name", area.Name);
                         cmd.Parameters.AddWithValue("@idcountry", area.IdCountry);
@@ -124,13 +126,13 @@ namespace DAL
             public int UpdateArea(Area area)
             {
                 int result = 0;
-                string connectionString = Configuration.GetConnectionString("DefaultConnection");
+              
 
                 try
                 {
                     using (SqlConnection cn = new SqlConnection(connectionString))
                     {
-                        string query = "UPDATE Areas SET Name=@name, IdCountry=@idCountry WHERE IdArea=@id";
+                        string query = "UPDATE Area SET Name=@name, IdCountry=@idCountry WHERE IdArea=@id";
                         SqlCommand cmd = new SqlCommand(query, cn);
                         cmd.Parameters.AddWithValue("@id", area.IdArea);
                         cmd.Parameters.AddWithValue("@name", area.Name);
@@ -153,13 +155,13 @@ namespace DAL
             public int DeleteArea(int id)
             {
                 int result = 0;
-                string connectionString = Configuration.GetConnectionString("DefaultConnection");
+             
 
                 try
                 {
                     using (SqlConnection cn = new SqlConnection(connectionString))
                     {
-                        string query = "DELETE FROM Areas WHERE IdArea=@id";
+                        string query = "DELETE FROM Area WHERE IdArea=@id";
                         SqlCommand cmd = new SqlCommand(query, cn);
                         cmd.Parameters.AddWithValue("@id", id);
 

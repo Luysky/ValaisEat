@@ -16,17 +16,19 @@ namespace DAL
             {
                 Configuration = configuration;
             }
+        private string connectionString = "Server=153.109.124.35;Database=ValaisEatDespair;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=true";
 
-            public List<Country> GetCountries()
+
+        public List<Country> GetCountries()
             {
                 List<Country> results = null;
-                string connectionString = Configuration.GetConnectionString("DefaultConnection");
+                
 
                 try
                 {
                     using (SqlConnection cn = new SqlConnection(connectionString))
                     {
-                        string query = "SELECT * FROM Countries";
+                        string query = "SELECT * FROM Country";
                         SqlCommand cmd = new SqlCommand(query, cn);
 
                         cn.Open();
@@ -61,13 +63,13 @@ namespace DAL
             public Country GetCountry(int id)
             {
                 Country country = null;
-                string connectionString = Configuration.GetConnectionString("DefaultConnection");
+                
 
                 try
                 {
                     using (SqlConnection cn = new SqlConnection(connectionString))
                     {
-                        string query = "SELECT * FROM Countries WHERE IdCountry = @id";
+                        string query = "SELECT * FROM Country WHERE IdCountry = @id";
                         SqlCommand cmd = new SqlCommand(query, cn);
                         cmd.Parameters.AddWithValue("@id", id);
 
@@ -96,13 +98,13 @@ namespace DAL
 
             public Country AddCountry(Country country)
             {
-                string connectionString = Configuration.GetConnectionString("DefaultConnection");
+                
 
                 try
                 {
                     using (SqlConnection cn = new SqlConnection(connectionString))
                     {
-                        string query = "INSERT INTO Countries(Name) VALUES(@name); SELECT SCOPE_IDENTITY()";
+                        string query = "INSERT INTO Country(Name) VALUES(@name); SELECT SCOPE_IDENTITY()";
                         SqlCommand cmd = new SqlCommand(query, cn);
                         cmd.Parameters.AddWithValue("@name", country.Name);
                        
@@ -124,13 +126,13 @@ namespace DAL
             public int UpdateCountry(Country country)
             {
                 int result = 0;
-                string connectionString = Configuration.GetConnectionString("DefaultConnection");
+                
 
                 try
                 {
                     using (SqlConnection cn = new SqlConnection(connectionString))
                     {
-                        string query = "UPDATE Countries SET Name=@name WHERE IdCountry=@id";
+                        string query = "UPDATE Country SET Name=@name WHERE IdCountry=@id";
                         SqlCommand cmd = new SqlCommand(query, cn);
                         cmd.Parameters.AddWithValue("@id", country.IdCountry);
                         cmd.Parameters.AddWithValue("@name", country.Name);
@@ -153,13 +155,13 @@ namespace DAL
             public int DeleteCountry(int id)
             {
                 int result = 0;
-                string connectionString = Configuration.GetConnectionString("DefaultConnection");
+                
 
                 try
                 {
                     using (SqlConnection cn = new SqlConnection(connectionString))
                     {
-                        string query = "DELETE FROM Countries WHERE IdCountry=@id";
+                        string query = "DELETE FROM Country WHERE IdCountry=@id";
                         SqlCommand cmd = new SqlCommand(query, cn);
                         cmd.Parameters.AddWithValue("@id", id);
 
