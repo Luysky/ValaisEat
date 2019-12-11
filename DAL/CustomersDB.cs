@@ -43,7 +43,7 @@ namespace DAL
 
                             customers.IdCustomer = (int)dr["IdCustomer"];
                             customers.Name = (string)dr["Name"];
-                            customers.Adresse = (string)dr["IdAdresse"];
+                            customers.Adresse = (string)dr["Adresse"];
                             customers.Email = (string)dr["Email"];
                             customers.Password = (string)dr["Password"];
                             customers.IdCity = (int)dr["IdCity"];
@@ -87,7 +87,7 @@ namespace DAL
 
                             customer.IdCustomer = (int)dr["IdCustomer"];
                             customer.Name = (string)dr["Name"];
-                            customer.Adresse = (string)dr["IdAdresse"];
+                            customer.Adresse = (string)dr["Adresse"];
                             customer.Email = (string)dr["Email"];
                             customer.Password = (string)dr["Password"];
                             customer.IdCity = (int)dr["IdCity"];
@@ -192,7 +192,7 @@ namespace DAL
 
         public bool IsUserValid(Customer c, string email)
         {
-            if (c.Email == email)
+            if (c.Email.Equals(email))
             {
                 return true;
             }

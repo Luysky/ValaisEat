@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BLL;
+using DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication.Models;
@@ -24,6 +25,8 @@ namespace WebApplication.Controllers
 
 
         private ICustomersManager CustomerManager { get; }
+
+        private IDeliversManager DeliverManager { get; }
       
 
         // GET: Order
@@ -39,9 +42,20 @@ namespace WebApplication.Controllers
         }
 
         // GET: Order/Create
-        public ActionResult Create()
+        public ActionResult CreateOrder()
         {
-            return View();
+            var newOrder = new Order();
+            newOrder.IdCustomer = (int)HttpContext.Session.GetInt32("idCustomer");
+            newOrder.IdDeliver = 1;
+            // newOrder.IdDeliver = DeliverManager.GetAvailableDeliver((int)HttpContext.Session.GetInt32("idCustomer"));
+            newOrder.OrderPrice = 0 ;
+            newOrder.Status = "En cours de Commande";
+
+            var creation = OrderManager.AddOrder(newOrder);
+
+            HttpContext.Session.SetInt32("idOrder", creation.IdOrder);
+
+            return RedirectToAction("GetAllAreas", "Area");
         }
 
         // POST: Order/Create
@@ -134,7 +148,7 @@ namespace WebApplication.Controllers
 
                 results.Add(Details);
             }
-        
+
 
             return View(results);
         }

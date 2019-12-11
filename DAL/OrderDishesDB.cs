@@ -43,7 +43,7 @@ namespace DAL
                             orderDishes.IdOrder = (int)dr["IdOrder"];
                             orderDishes.IdDish = (int)dr["IdDish"];
                             orderDishes.Quantity = (int)dr["Quantity"];
-                            orderDishes.OrderDishPrice = (double)dr["Price"];
+                            orderDishes.OrderDishPrice = (decimal)dr["Price"];
 
 
                             results.Add(orderDishes);
@@ -83,7 +83,7 @@ namespace DAL
                             orderDish.IdOrder = (int)dr["IdOrder"];
                             orderDish.IdDish = (int)dr["IdDish"];
                             orderDish.Quantity = (int)dr["Quantity"];
-                            orderDish.OrderDishPrice = (double)dr["Price"];
+                            orderDish.OrderDishPrice = (decimal)dr["Price"];
                         }
                     }
                 }

@@ -9,7 +9,7 @@ namespace DTO
         public int IdOrder { get; set; }
         public int IdDish { get; set; }
         public int Quantity { get; set; }
-        public double OrderDishPrice { get; set; }
+        public decimal OrderDishPrice { get; set; }
 
         public override string ToString()
         {

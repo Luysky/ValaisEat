@@ -77,6 +77,8 @@ namespace WebApplication.Controllers
         
         public ActionResult LoginC() {
 
+            ViewData["Message"] = "Veuillez vous identifier";
+
             return View();
         }
         
@@ -84,24 +86,28 @@ namespace WebApplication.Controllers
         [HttpPost]
         public ActionResult LoginC(Login l)
         {
-            
+            l.Email = "zermi@gmail.com";
+            l.Password = "123456";
+
 
             var customers = CustomerManager.GetCustomers();
             foreach (var c in customers)
             {
-                var test = CustomerManager.IsUserValid(c, l.Email);
-                if (test == true)
+                var mailTest = CustomerManager.IsUserValid(c, l.Email);
+
+                if (mailTest)
                 {
-                    if (c.Password == l.Password)
+                    if (c.Password.Equals(l.Password))
                     {
                         HttpContext.Session.SetInt32("idCustomer", c.IdCustomer);
-                        return RedirectToAction("GetAllAreas", "Areas");
+                        return RedirectToAction("CreateOrder", "Order");
+                        
                     }
+                    ViewData["MessageError"] = "Mot de Passe Incorrect";
                 }
-               
             }
-            
 
+           
             return View();
             
 

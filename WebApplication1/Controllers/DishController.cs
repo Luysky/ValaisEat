@@ -36,6 +36,12 @@ namespace WebApplication1.Controllers
             return View(dishes);
         }
 
+        public IActionResult AjoutPanier(int id)
+        {
+            
+            return RedirectToAction("Create", "OrderDish");
+        }
+
 
     }
 }

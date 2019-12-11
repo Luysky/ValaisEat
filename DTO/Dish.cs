@@ -8,7 +8,7 @@ namespace DTO
     {
         public int IdDish { get; set; }
         public string Name { get; set; }
-        public double DishPrice { get; set; }
+        public decimal DishPrice { get; set; }
         public string Status { get; set; }
         public int IdRestaurant { get; set; }
 

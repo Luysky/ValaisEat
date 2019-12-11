@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace BLL
 {
-    internal interface IOrderDishesManager
+    public interface IOrderDishesManager
     {
      
 

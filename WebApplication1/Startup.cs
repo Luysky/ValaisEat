@@ -40,6 +40,14 @@ namespace WebApplication1
             services.AddScoped<ICitiesDB, CitiesDB>();
             services.AddScoped<IRestaurantsManager, RestaurantsManager>();
             services.AddScoped<IRestaurantsDB, RestaurantsDB>();
+            services.AddScoped<IDishesManager, DishesManager>();
+            services.AddScoped<IDishesDB, DishesDB>();
+            services.AddScoped<ICustomersManager, CustomersManager>();
+            services.AddScoped<ICustomersDB, CustomersDB>();
+            services.AddScoped<IDeliversManager, DeliversManager>();
+            services.AddScoped<IDeliversDB, DeliversDB>();
+
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

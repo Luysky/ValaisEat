@@ -39,16 +39,19 @@ namespace WebApplication1.Controllers
             return View();
         }
 
+        public IActionResult Customers() {
+
+            
+           ViewData["Message"] = "Veuillez vous identifier";
+
+           return RedirectToAction("LoginC", "Customer");
+
+
+        }
+       /* [HttpPost]
         public IActionResult Customers(Login l)
         {
-            /*
-            ViewData["Message"] = "Veuillez vous identifier";
-
-            return View();
-            */
-
-
-            //C'est GetCustomers qui a un problème. C'est vide ou je sais pas quoi. 
+            
             var customers = CustomerManager.GetCustomers();
             foreach (var c in customers)
             {
@@ -58,7 +61,7 @@ namespace WebApplication1.Controllers
                     if (c.Password == l.Password)
                     {
                         HttpContext.Session.SetInt32("idCustomer", c.IdCustomer);
-                        return RedirectToAction("GetAllAreas", "Areas");
+                        return RedirectToAction("GetAllAreas", "Area");
                     }
                 }
 
@@ -68,7 +71,7 @@ namespace WebApplication1.Controllers
             return View();
 
 
-        }
+        }*/
 
         public IActionResult Delivers()
         {
