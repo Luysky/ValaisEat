@@ -30,7 +30,7 @@ namespace WebApplication1.Controllers
         public ActionResult GetAllDishes()
         {
             
-            var dishes = DishManager.GetDishes((int)HttpContext.Session.GetInt32("idCity"));
+            var dishes = DishManager.GetDishes((int)HttpContext.Session.GetInt32("idRestaurants"));
 
 
             return View(dishes);
@@ -41,6 +41,8 @@ namespace WebApplication1.Controllers
             
             return RedirectToAction("Create", "OrderDish");
         }
+
+       
 
 
     }

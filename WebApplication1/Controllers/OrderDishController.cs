@@ -6,6 +6,7 @@ using BLL;
 using DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
@@ -17,7 +18,7 @@ namespace WebApplication.Controllers
             OrderDishManager = orderdishesManager;
         }
 
-        private IDishesManager DishesManager;
+        private readonly IDishesManager DishesManager;
 
         // GET: OrderDish
         public ActionResult Index()
@@ -110,5 +111,27 @@ namespace WebApplication.Controllers
                 return View();
             }
         }
+
+        public IActionResult AffichePanier()
+        {
+            var panier = OrderDishManager.GetOrderDishes((int)HttpContext.Session.GetInt32("idOrder"));
+            List<Panier> total = new List<Panier>();
+            foreach (var p in panier)
+            {
+                Panier article = new Panier();
+                var dish = DishesManager.GetDish(p.IdDish);
+
+                article.ProductId = dish.IdDish;
+                article.ProductName = dish.Name;
+                article.Quantity = p.Quantity;
+                article.TotalPrice = p.OrderDishPrice;
+
+                total.Add(article);
+            }
+
+
+           return View(total);
+        }
+
     }
 }

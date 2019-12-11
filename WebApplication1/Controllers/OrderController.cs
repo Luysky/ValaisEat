@@ -153,5 +153,10 @@ namespace WebApplication.Controllers
             return View(results);
         }
 
+        /*public IActionResult AffichePanier()
+        {
+
+        }*/
+
     }
 }
