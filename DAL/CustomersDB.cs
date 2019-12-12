@@ -44,8 +44,6 @@ namespace DAL
                             customers.IdCustomer = (int)dr["IdCustomer"];
                             customers.Name = (string)dr["Name"];
                             customers.Adresse = (string)dr["Adresse"];
-                            customers.Email = (string)dr["Email"];
-                            customers.Password = (string)dr["Password"];
                             customers.IdCity = (int)dr["IdCity"];
 
 
@@ -88,8 +86,6 @@ namespace DAL
                             customer.IdCustomer = (int)dr["IdCustomer"];
                             customer.Name = (string)dr["Name"];
                             customer.Adresse = (string)dr["Adresse"];
-                            customer.Email = (string)dr["Email"];
-                            customer.Password = (string)dr["Password"];
                             customer.IdCity = (int)dr["IdCity"];
                         }
                     }
@@ -110,12 +106,10 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT INTO Customer(Name, Adresse, Email, Password, Idcity) VALUES(@name, @adresse, @email, @password, @idcity); SELECT SCOPE_IDENTITY()";
+                    string query = "INSERT INTO Customer(Name, Adresse, Idcity) VALUES(@name, @adresse, @idcity); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@name", customer.Name);
                     cmd.Parameters.AddWithValue("@adresse", customer.Adresse);
-                    cmd.Parameters.AddWithValue("@email", customer.Email);
-                    cmd.Parameters.AddWithValue("@password", customer.Password);
                     cmd.Parameters.AddWithValue("@idcity", customer.IdCity);
 
 
@@ -141,13 +135,11 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE Customer SET Name=@name, Adresse=@adresse, Email=@email ,Password=@password, Idcity=@idcity  WHERE IdCustomer=@id";
+                    string query = "UPDATE Customer SET Name=@name, Adresse=@adresse, Idcity=@idcity  WHERE IdCustomer=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", customer.IdCustomer);
                     cmd.Parameters.AddWithValue("@name", customer.Name);
                     cmd.Parameters.AddWithValue("@adresse", customer.Adresse);
-                    cmd.Parameters.AddWithValue("@email", customer.Email);
-                    cmd.Parameters.AddWithValue("@password", customer.Password);
                     cmd.Parameters.AddWithValue("@idcity", customer.IdCity);
 
 
@@ -188,19 +180,6 @@ namespace DAL
             }
 
             return result;
-        }
-
-        public bool IsUserValid(Customer c, string email)
-        {
-            if (c.Email.Equals(email))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-            
         }
 
 

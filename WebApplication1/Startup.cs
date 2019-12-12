@@ -46,6 +46,11 @@ namespace WebApplication1
             services.AddScoped<ICustomersDB, CustomersDB>();
             services.AddScoped<IDeliversManager, DeliversManager>();
             services.AddScoped<IDeliversDB, DeliversDB>();
+            services.AddScoped<IOrdersManager, OrdersManager>();
+            services.AddScoped<IOrdersDB, OrdersDB>();
+            services.AddScoped<ICustomerLoginsManager, CustomerLoginsManager>();
+            services.AddScoped<ICustomerLoginsDB, CustomerLoginsDB>();
+
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

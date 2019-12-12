@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BLL;
+using DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication.Models;
@@ -73,45 +74,6 @@ namespace WebApplication.Controllers
             {
                 return View();
             }
-        }
-        
-        public ActionResult LoginC() {
-
-            ViewData["Message"] = "Veuillez vous identifier";
-
-            return View();
-        }
-        
-
-        [HttpPost]
-        public ActionResult LoginC(Login l)
-        {
-            l.Email = "zermi@gmail.com";
-            l.Password = "123456";
-
-
-            var customers = CustomerManager.GetCustomers();
-            foreach (var c in customers)
-            {
-                var mailTest = CustomerManager.IsUserValid(c, l.Email);
-
-                if (mailTest)
-                {
-                    if (c.Password.Equals(l.Password))
-                    {
-                        HttpContext.Session.SetInt32("idCustomer", c.IdCustomer);
-                        return RedirectToAction("CreateOrder", "Order");
-                        
-                    }
-                    ViewData["MessageError"] = "Mot de Passe Incorrect";
-                }
-            }
-
-           
-            return View();
-            
-
-
         }
 
 

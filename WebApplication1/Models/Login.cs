@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DTO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace WebApplication.Models
 {
     public class Login
     {
-        public Login() { }
+       //private Customer custom;
 
         [Required]
         public string Email;

@@ -12,7 +12,6 @@ namespace DAL
         Customer AddCustomer(Customer customer);
         int UpdateCustomer(Customer customer);
         int DeleteCustomer(int id);
-        bool IsUserValid(Customer c, string email);
 
     }
 }

@@ -18,8 +18,7 @@ namespace WebApplication.Controllers
             OrderDishManager = orderdishesManager;
         }
 
-        private readonly IDishesManager DishesManager;
-
+        private IDishesManager DishesManager;
         // GET: OrderDish
         public ActionResult Index()
         {

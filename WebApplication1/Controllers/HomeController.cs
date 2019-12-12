@@ -44,7 +44,7 @@ namespace WebApplication1.Controllers
             
            ViewData["Message"] = "Veuillez vous identifier";
 
-           return RedirectToAction("LoginC", "Customer");
+           return RedirectToAction("LoginC", "CustomerLogin");
 
 
         }
