@@ -25,10 +25,5 @@ namespace BLL
         {
             return DeliversDbObject.GetDelivers();
         }
-
-        public bool IsUserValid(Deliver d, string email)
-        {
-            return DeliversDbObject.IsUserValid(d,email);
-        }
     }
 }

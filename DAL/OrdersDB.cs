@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 
 namespace DAL
 {
-    public class OrdersDB :IOrdersDB
+    public class OrdersDB : IOrdersDB
     {
 
         public IConfiguration Configuration { get; }
@@ -26,7 +26,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM Order WHERE IdDeliver = @id";
+                    string query = "SELECT * FROM [Order] WHERE IdDeliver = @id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 
@@ -45,7 +45,7 @@ namespace DAL
                             orders.IdCustomer = (int)dr["IdCustomer"];
                             orders.IdDeliver = (int)dr["IdDeliver"];
                             orders.Status = (string)dr["Status"];
-                            orders.OrderPrice = (int)dr["OrderPrice"];
+                            orders.OrderPrice = (decimal)dr["OrderPrice"];
 
 
                             results.Add(orders);
@@ -70,7 +70,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM Order WHERE IdOrder = @id";
+                    string query = "SELECT * FROM [Order] WHERE IdOrder = @id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 
@@ -86,7 +86,7 @@ namespace DAL
                             order.IdCustomer = (int)dr["IdCustomer"];
                             order.IdDeliver = (int)dr["IdDeliver"];
                             order.Status = (string)dr["Status"];
-                            order.OrderPrice = (int)dr["OrderPrice"];
+                            order.OrderPrice = (decimal)dr["OrderPrice"];
                         }
                     }
                 }
@@ -101,19 +101,17 @@ namespace DAL
 
         public Order AddOrder(Order order)
         {
-      
-
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT INTO Order(IdCustomer, IdDeliver, Status, OrderPrice) VALUES(@idCustomer, @idDeliver, @status, @orderPrice); SELECT SCOPE_IDENTITY()";
+                    string query = "INSERT INTO [Order](IdDeliver, IdCustomer, Status, OrderPrice) VALUES(@idDeliver, @idCustomer, @status, @orderPrice); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@idCustomer", order.IdCustomer);
                     cmd.Parameters.AddWithValue("@idDeliver", order.IdDeliver);
+                    cmd.Parameters.AddWithValue("@idCustomer", order.IdCustomer);
                     cmd.Parameters.AddWithValue("@status", order.Status);
                     cmd.Parameters.AddWithValue("@orderPrice", order.OrderPrice);
-
+                   
 
                     cn.Open();
 
@@ -138,7 +136,7 @@ namespace DAL
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
                    
-                    string query = "UPDATE Order SET IdCustomer=@idCustomer, IdDeliver=@idDeliver, Status=@status, OrderPrice=@orderPrice WHERE IdOrder=@id";
+                    string query = "UPDATE [Order] SET IdCustomer=@idCustomer, IdDeliver=@idDeliver, Status=@status, OrderPrice=@orderPrice WHERE IdOrder=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                    
                     cmd.Parameters.AddWithValue("@id", order.IdOrder);
@@ -170,7 +168,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "DELETE FROM Order WHERE IdOrder=@id";
+                    string query = "DELETE FROM [Order] WHERE IdOrder=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 

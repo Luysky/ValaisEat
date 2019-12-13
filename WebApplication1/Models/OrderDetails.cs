@@ -12,7 +12,7 @@ namespace WebApplication.Models
 
         public string Status;
 
-        public double Price;
+        public decimal Price;
 
         public string CustomerName;
 

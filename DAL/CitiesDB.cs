@@ -16,7 +16,7 @@ namespace DAL
         }
         protected string connectionString = "Server=153.109.124.35;Database=ValaisEatDespair;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=true";
 
-        public List<City> GetCities(int id)
+        public List<City> GetCities()
         {
             List<City> results = null;
              
@@ -25,9 +25,9 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM City WHERE IdArea = @id";
+                    string query = "SELECT * FROM City";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@id", id);
+                    
 
                     cn.Open();
 

@@ -48,10 +48,10 @@ namespace WebApplication.Controllers
 
                 var creation = new OrderDish();
 
-                creation.IdOrder = 1; //(int)HttpContext.Session.GetInt32("idOrder");
+                creation.IdOrder = (int)HttpContext.Session.GetInt32("idOrder");
                 creation.IdDish = id;
 
-            if (od.Quantity > 0)
+            if (od.Quantity > 0  && od.Quantity<=20)
                 creation.Quantity = od.Quantity;
             else
             {
@@ -119,7 +119,7 @@ namespace WebApplication.Controllers
 
         public IActionResult AffichePanier()
         {
-            var panier = OrderDishManager.GetOrderDishes(1);//(int)HttpContext.Session.GetInt32("idOrder"));
+            var panier = OrderDishManager.GetOrderDishes((int)HttpContext.Session.GetInt32("idOrder"));
             List<Panier> total = new List<Panier>();
             foreach (var p in panier)
             {

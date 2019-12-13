@@ -9,34 +9,34 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApplication.Controllers
 {
-    public class CustomerLoginController : Controller
+    public class DeliverLoginController : Controller
     {
 
-        private ICustomerLoginsManager CustomerLoginManager { get; }
-        public CustomerLoginController(ICustomerLoginsManager customerloginsManager)
+        private IDeliverLoginsManager DeliverLoginManager { get; }
+        public DeliverLoginController(IDeliverLoginsManager deliverloginsManager)
         {
-            CustomerLoginManager = customerloginsManager;
+            DeliverLoginManager = deliverloginsManager;
         }
 
-        // GET: CustomerLogin
+        // GET: DeliverLogin
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: CustomerLogin/Details/5
+        // GET: DeliverLogin/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: CustomerLogin/Create
+        // GET: DeliverLogin/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: CustomerLogin/Create
+        // POST: DeliverLogin/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -53,13 +53,13 @@ namespace WebApplication.Controllers
             }
         }
 
-        // GET: CustomerLogin/Edit/5
+        // GET: DeliverLogin/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: CustomerLogin/Edit/5
+        // POST: DeliverLogin/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -76,13 +76,13 @@ namespace WebApplication.Controllers
             }
         }
 
-        // GET: CustomerLogin/Delete/5
+        // GET: DeliverLogin/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: CustomerLogin/Delete/5
+        // POST: DeliverLogin/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
@@ -99,7 +99,7 @@ namespace WebApplication.Controllers
             }
         }
 
-        public ActionResult LoginC()
+        public ActionResult LoginD()
         {
 
             ViewData["Message"] = "Veuillez vous identifier";
@@ -109,17 +109,17 @@ namespace WebApplication.Controllers
 
 
         [HttpPost]
-        public ActionResult LoginC(CustomerLogin log)
+        public ActionResult LoginD(DeliverLogin log)
         {
 
-            var testConnection = CustomerLoginManager.IsUserValid(log.Email, log.Password);
+            var testConnection = DeliverLoginManager.IsUserValid(log.Email, log.Password);
             if (testConnection != 0)
             {
-                HttpContext.Session.SetInt32("idCustomer", testConnection);
-                return RedirectToAction("CreateOrder", "Order");
+                HttpContext.Session.SetInt32("idDeliver", testConnection);
+                return RedirectToAction("GetAllOrdersDeliver", "Order");
             }
             else
-            return View();
+                return View();
 
 
 

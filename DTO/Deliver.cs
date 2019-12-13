@@ -9,14 +9,11 @@ namespace DTO
         public int IdDeliver { get; set; }
         public string Name { get; set; }
         public int PhoneNumber { get; set; }
-        public int IdArea { get; set; }
-        public string Email { get; set; }
-
-        public string Password { get; set; }
+        public int IdCity { get; set; }
 
         public override string ToString()
         {
-            return $"{IdDeliver}|{Name}|{PhoneNumber}|{IdArea}";
+            return $"{IdDeliver}|{Name}|{PhoneNumber}|{IdCity}";
         }
     }
 }

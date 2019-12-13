@@ -8,7 +8,7 @@ namespace DAL
 {
     public interface ICitiesDB
     {
-        List<City> GetCities(int id);
+        List<City> GetCities();
         City GetCity(int id);
     }
 }

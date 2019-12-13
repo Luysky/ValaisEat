@@ -106,10 +106,10 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT INTO OrderDish(IdOrder, IdDish, Quantity, OrderDishPrice) VALUES(@IdOrder, @ IdDish, @quantity, @price)";
+                    string query = "INSERT INTO OrderDish(IdOrder, IdDish, Quantity, OrderDishPrice) VALUES(@idOrder, @idDish, @quantity, @price)";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@IdOrder", orderDish.IdOrder);
-                    cmd.Parameters.AddWithValue("@IdDish", orderDish.IdDish);
+                    cmd.Parameters.AddWithValue("@idOrder", orderDish.IdOrder);
+                    cmd.Parameters.AddWithValue("@idDish", orderDish.IdDish);
                     cmd.Parameters.AddWithValue("@quantity", orderDish.Quantity);
                     cmd.Parameters.AddWithValue("@price", orderDish.OrderDishPrice);
 

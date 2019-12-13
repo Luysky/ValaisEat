@@ -36,20 +36,31 @@ namespace WebApplication1
             services.AddSession();
             services.AddScoped<IAreasManager, AreasManager>();
             services.AddScoped<IAreasDB, AreasDB>();
+
             services.AddScoped<ICitiesManager, CitiesManager>();
             services.AddScoped<ICitiesDB, CitiesDB>();
+
             services.AddScoped<IRestaurantsManager, RestaurantsManager>();
             services.AddScoped<IRestaurantsDB, RestaurantsDB>();
+
             services.AddScoped<IDishesManager, DishesManager>();
             services.AddScoped<IDishesDB, DishesDB>();
+
             services.AddScoped<ICustomersManager, CustomersManager>();
             services.AddScoped<ICustomersDB, CustomersDB>();
+
             services.AddScoped<IDeliversManager, DeliversManager>();
             services.AddScoped<IDeliversDB, DeliversDB>();
+
             services.AddScoped<IOrdersManager, OrdersManager>();
             services.AddScoped<IOrdersDB, OrdersDB>();
+
             services.AddScoped<ICustomerLoginsManager, CustomerLoginsManager>();
             services.AddScoped<ICustomerLoginsDB, CustomerLoginsDB>();
+
+            services.AddScoped<IDeliverLoginsManager, DeliverLoginsManager>();
+            services.AddScoped<IDeliverLoginsDB, DeliverLoginsDB>();
+            
             services.AddScoped<IOrderDishesManager, OrderDishesManager>();
             services.AddScoped<IOrderDishesDB, OrderDishesDB>();
 

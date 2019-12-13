@@ -83,37 +83,8 @@ namespace WebApplication.Controllers
         }
 
        */
-        [HttpGet]
-        [ValidateAntiForgeryToken]
+        
 
-        public ActionResult LoginD()
-        {
-
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult LoginD(Login l)
-        {
-            var customers = DeliverManager.GetDelivers();
-            foreach (var d in customers)
-            {
-                var test = DeliverManager.IsUserValid(d, l.Email);
-                if (test == true)
-                {
-                    if (d.Password == l.Password)
-                    {
-                        HttpContext.Session.SetInt32("idDeliver", d.IdDeliver);
-                        return RedirectToAction("GetAllAreas", "Areas");
-                    }
-                }
-
-            }
-
-            return View();
-
-
-
-        }
+       
     }
 }

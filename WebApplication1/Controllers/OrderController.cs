@@ -17,7 +17,7 @@ namespace WebApplication.Controllers
         private ICitiesManager CitiesManager { get; }
         private ICustomersManager CustomerManager { get; }
         private IDeliversManager DeliverManager { get; }
-        public OrderController(IOrdersManager ordersManager, ICitiesManager citiesManager, CustomersManager customersManager, IDeliversManager deliversManager)
+        public OrderController(IOrdersManager ordersManager, ICitiesManager citiesManager, ICustomersManager customersManager, IDeliversManager deliversManager)
         {
             OrderManager = ordersManager;
             CitiesManager = citiesManager;
@@ -25,10 +25,7 @@ namespace WebApplication.Controllers
             DeliverManager = deliversManager;
         }
 
-
-       
-      
-
+        
         // GET: Order
         public ActionResult Index()
         {
@@ -55,7 +52,7 @@ namespace WebApplication.Controllers
 
             HttpContext.Session.SetInt32("idOrder", creation.IdOrder);
 
-            return RedirectToAction("GetAllAreas", "Area");
+            return RedirectToAction("GetAllCities", "City");
         }
 
         // POST: Order/Create
@@ -152,11 +149,6 @@ namespace WebApplication.Controllers
 
             return View(results);
         }
-
-        /*public IActionResult AffichePanier()
-        {
-
-        }*/
 
     }
 }

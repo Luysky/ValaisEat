@@ -10,6 +10,5 @@ namespace BLL
 
         List<Deliver> GetDelivers();
         Deliver GetDeliver(int id);
-        bool IsUserValid(Deliver d, string email);
     }
 }

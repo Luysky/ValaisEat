@@ -31,7 +31,7 @@ namespace WebApplication1.Controllers
 
         public ActionResult GetAllCities()
         {
-            var cities = CityManager.GetCities((int)HttpContext.Session.GetInt32("idArea"));
+            var cities = CityManager.GetCities();
            
 
             return View(cities);

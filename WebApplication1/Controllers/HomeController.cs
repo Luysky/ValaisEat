@@ -77,7 +77,7 @@ namespace WebApplication1.Controllers
         {
             ViewData["Message"] = "Veuillez vous identifier";
 
-            return View();
+            return RedirectToAction("LoginD", "DeliverLogin");
 
         }
 
