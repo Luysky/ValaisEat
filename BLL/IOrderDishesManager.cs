@@ -10,7 +10,7 @@ namespace BLL
 
         List<OrderDish> GetOrderDishes(int id);
         OrderDish GetOrderDish(int id);
-        OrderDish AddOrderDish(OrderDish orderDish);
+        void AddOrderDish(OrderDish orderDish);
 
         int UpdateOrderDish(OrderDish orderDish);
         int DeleteOrderDish(int id);

@@ -48,30 +48,7 @@ namespace WebApplication1.Controllers
 
 
         }
-       /* [HttpPost]
-        public IActionResult Customers(Login l)
-        {
-            
-            var customers = CustomerManager.GetCustomers();
-            foreach (var c in customers)
-            {
-                var test = CustomerManager.IsUserValid(c, l.Username);
-                if (test == true)
-                {
-                    if (c.Password == l.Password)
-                    {
-                        HttpContext.Session.SetInt32("idCustomer", c.IdCustomer);
-                        return RedirectToAction("GetAllAreas", "Area");
-                    }
-                }
-
-            }
-
-
-            return View();
-
-
-        }*/
+      
 
         public IActionResult Delivers()
         {
@@ -80,8 +57,6 @@ namespace WebApplication1.Controllers
             return RedirectToAction("LoginD", "DeliverLogin");
 
         }
-
-
      
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

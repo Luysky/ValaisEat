@@ -98,7 +98,7 @@ namespace DAL
             return orderDish;
         }
 
-        public OrderDish AddOrderDish(OrderDish orderDish)
+        public void AddOrderDish(OrderDish orderDish)
         {
         
 
@@ -116,14 +116,13 @@ namespace DAL
 
                     cn.Open();
 
+                    cmd.ExecuteNonQuery();
                 }
             }
             catch (Exception e)
             {
                 throw e;
-            }
-
-            return orderDish;
+            }            
         }
 
         public int UpdateOrderDish(OrderDish orderDish)

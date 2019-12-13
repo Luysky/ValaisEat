@@ -16,9 +16,9 @@ namespace BLL
         }
 
 
-        public OrderDish AddOrderDish(OrderDish orderDish)
+        public void AddOrderDish(OrderDish orderDish)
         {
-            return OrderDishesDbObject.AddOrderDish(orderDish);
+            OrderDishesDbObject.AddOrderDish(orderDish);
         }
 
         public int DeleteOrderDish(int id)
