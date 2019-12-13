@@ -14,19 +14,19 @@ namespace WebApplication.Controllers
     {
 
         private IOrdersManager OrderManager { get; }
-        public OrderController(IOrdersManager ordersManager)
+        private ICitiesManager CitiesManager { get; }
+        private ICustomersManager CustomerManager { get; }
+        private IDeliversManager DeliverManager { get; }
+        public OrderController(IOrdersManager ordersManager, ICitiesManager citiesManager, CustomersManager customersManager, IDeliversManager deliversManager)
         {
             OrderManager = ordersManager;
+            CitiesManager = citiesManager;
+            CustomerManager = customersManager;
+            DeliverManager = deliversManager;
         }
 
 
-        private ICitiesManager CitiesManager { get; }
-
-
-
-        private ICustomersManager CustomerManager { get; }
-
-        private IDeliversManager DeliverManager { get; }
+       
       
 
         // GET: Order

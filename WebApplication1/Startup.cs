@@ -50,6 +50,8 @@ namespace WebApplication1
             services.AddScoped<IOrdersDB, OrdersDB>();
             services.AddScoped<ICustomerLoginsManager, CustomerLoginsManager>();
             services.AddScoped<ICustomerLoginsDB, CustomerLoginsDB>();
+            services.AddScoped<IOrderDishesManager, OrderDishesManager>();
+            services.AddScoped<IOrderDishesDB, OrderDishesDB>();
 
 
 

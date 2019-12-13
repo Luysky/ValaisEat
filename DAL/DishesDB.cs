@@ -78,11 +78,9 @@ namespace DAL
 
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
-                        while (dr.Read())
+                        if (dr.Read())
                         {
 
-                            if (dr.Read())
-                        
                             dish = new Dish();
 
                             dish.IdDish = (int)dr["IdDish"];

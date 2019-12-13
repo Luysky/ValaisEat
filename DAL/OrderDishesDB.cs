@@ -45,7 +45,7 @@ namespace DAL
                             orderDishes.IdOrder = (int)dr["IdOrder"];
                             orderDishes.IdDish = (int)dr["IdDish"];
                             orderDishes.Quantity = (int)dr["Quantity"];
-                            orderDishes.OrderDishPrice = (decimal)dr["Price"];
+                            orderDishes.OrderDishPrice = (decimal)dr["OrderDishPrice"];
 
 
                             results.Add(orderDishes);
@@ -85,7 +85,7 @@ namespace DAL
                             orderDish.IdOrder = (int)dr["IdOrder"];
                             orderDish.IdDish = (int)dr["IdDish"];
                             orderDish.Quantity = (int)dr["Quantity"];
-                            orderDish.OrderDishPrice = (decimal)dr["Price"];
+                            orderDish.OrderDishPrice = (decimal)dr["OrderDishPrice"];
                         }
                     }
                 }
@@ -106,10 +106,10 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT INTO OrderDish(IdOrder, IdDish, Quantity,Price) VALUES(@IdOrder, @ IdDish, @quantity,@price)";
+                    string query = "INSERT INTO OrderDish(IdOrder, IdDish, Quantity, OrderDishPrice) VALUES(@IdOrder, @ IdDish, @quantity, @price)";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@IdOrder", orderDish.Quantity);
-                    cmd.Parameters.AddWithValue("@IdDish", orderDish.Quantity);
+                    cmd.Parameters.AddWithValue("@IdOrder", orderDish.IdOrder);
+                    cmd.Parameters.AddWithValue("@IdDish", orderDish.IdDish);
                     cmd.Parameters.AddWithValue("@quantity", orderDish.Quantity);
                     cmd.Parameters.AddWithValue("@price", orderDish.OrderDishPrice);
 

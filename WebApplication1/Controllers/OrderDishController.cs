@@ -13,12 +13,15 @@ namespace WebApplication.Controllers
     public class OrderDishController : Controller
     {
         private IOrderDishesManager OrderDishManager { get; }
-        public OrderDishController(IOrderDishesManager orderdishesManager)
+        private IDishesManager DishesManager { get; }
+        public OrderDishController(IOrderDishesManager orderdishesManager, IDishesManager dishesManager)
         {
             OrderDishManager = orderdishesManager;
+            DishesManager = dishesManager;
         }
 
-        private IDishesManager DishesManager;
+      
+
         // GET: OrderDish
         public ActionResult Index()
         {
@@ -33,9 +36,7 @@ namespace WebApplication.Controllers
 
         // GET: OrderDish/Create
         public ActionResult Create(int id)
-        {
-            
-                        
+        {         
             return View();
         }
 
@@ -44,25 +45,30 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(int id, OrderDish od)
         {
-            try
-            {
+
                 var creation = new OrderDish();
 
-                creation.IdOrder = (int)HttpContext.Session.GetInt32("idOrder");
+                creation.IdOrder = 1; //(int)HttpContext.Session.GetInt32("idOrder");
                 creation.IdDish = id;
+
+            if (od.Quantity > 0)
                 creation.Quantity = od.Quantity;
+            else
+            {
+                ViewData["Message"] = "La Quantité doit être entre 1 et 20 !";
+                return View();
+            }
+           
+                
 
                 var dish = DishesManager.GetDish(id);
 
                 creation.OrderDishPrice = dish.DishPrice * creation.Quantity;
+
                 OrderDishManager.AddOrderDish(creation);
 
                 return RedirectToAction("GetAllDishes", "Dish");
-            }
-            catch
-            {
-                return View();
-            }
+            
         }
 
         // GET: OrderDish/Edit/5
@@ -113,7 +119,7 @@ namespace WebApplication.Controllers
 
         public IActionResult AffichePanier()
         {
-            var panier = OrderDishManager.GetOrderDishes((int)HttpContext.Session.GetInt32("idOrder"));
+            var panier = OrderDishManager.GetOrderDishes(1);//(int)HttpContext.Session.GetInt32("idOrder"));
             List<Panier> total = new List<Panier>();
             foreach (var p in panier)
             {

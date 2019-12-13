@@ -30,7 +30,7 @@ namespace WebApplication1.Controllers
         public ActionResult GetAllDishes()
         {
             
-            var dishes = DishManager.GetDishes((int)HttpContext.Session.GetInt32("idRestaurants"));
+            var dishes = DishManager.GetDishes((int)HttpContext.Session.GetInt32("idRestaurant"));
 
 
             return View(dishes);
@@ -39,7 +39,7 @@ namespace WebApplication1.Controllers
         public IActionResult AjoutPanier(int id)
         {
             
-            return RedirectToAction("Create", "OrderDish");
+            return RedirectToAction("Create", "OrderDish", new { id });
         }
 
        
