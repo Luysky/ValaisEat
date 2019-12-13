@@ -14,10 +14,12 @@ namespace WebApplication.Controllers
     {
         private IOrderDishesManager OrderDishManager { get; }
         private IDishesManager DishesManager { get; }
-        public OrderDishController(IOrderDishesManager orderdishesManager, IDishesManager dishesManager)
+        private IOrdersManager OrderManager { get; }
+        public OrderDishController(IOrderDishesManager orderdishesManager, IDishesManager dishesManager, IOrdersManager ordersManager)
         {
             OrderDishManager = orderdishesManager;
             DishesManager = dishesManager;
+            OrderManager = ordersManager;
         }
 
       
@@ -95,9 +97,10 @@ namespace WebApplication.Controllers
         }
 
         // GET: OrderDish/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int idDish, int idOrder)
         {
-            return View();
+            OrderDishManager.DeleteOrderDish(idOrder, idDish);
+            return RedirectToAction("AffichePanier");
         }
 
         // POST: OrderDish/Delete/5
@@ -121,19 +124,26 @@ namespace WebApplication.Controllers
         {
             var panier = OrderDishManager.GetOrderDishes((int)HttpContext.Session.GetInt32("idOrder"));
             List<Panier> total = new List<Panier>();
+            var prixTotal = OrderManager.GetOrder((int)HttpContext.Session.GetInt32("idOrder"));
+
             foreach (var p in panier)
             {
                 Panier article = new Panier();
                 var dish = DishesManager.GetDish(p.IdDish);
-
+                article.OrderId = p.IdOrder;
                 article.ProductId = dish.IdDish;
                 article.ProductName = dish.Name;
                 article.Quantity = p.Quantity;
                 article.TotalPrice = p.OrderDishPrice;
 
                 total.Add(article);
+                prixTotal.OrderPrice += article.TotalPrice;
             }
 
+            double prix = (double)prixTotal.OrderPrice;
+            OrderManager.UpdateOrder(prixTotal);
+
+            ViewBag.prixTotalCommande = prix;
 
            return View(total);
         }

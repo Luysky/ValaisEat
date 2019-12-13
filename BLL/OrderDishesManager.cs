@@ -28,7 +28,7 @@ namespace BLL
 
         public int DeleteOrderDish(int idOrder, int idDish)
         {
-            throw new NotImplementedException();
+            return OrderDishesDbObject.DeleteOrderDish(idOrder, idDish);
         }
 
         public OrderDish GetOrderDish(int id)

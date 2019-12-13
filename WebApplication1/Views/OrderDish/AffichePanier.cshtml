@@ -49,11 +49,21 @@
                 @Html.DisplayFor(modelItem => item.TotalPrice)
             </td>
             <td>
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Delete", "Delete", new { idProd=item.ProductId, idOrder = item.OrderId})
             </td>
         </tr>
 }
+        <tr>
+            <td/>
+            <td/>
+            <td>TOTAL :</td>
+            <td>@ViewBag.prixTotalCommande</td>
+        </tr>
+
+       
+
     </tbody>
 </table>
+
 </body>
 </html>

@@ -10,6 +10,8 @@ namespace WebApplication.Models
 
         public int ProductId;
 
+        public int OrderId;
+
         public string ProductName;
 
         public int Quantity;
