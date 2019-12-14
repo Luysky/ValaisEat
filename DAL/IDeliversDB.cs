@@ -7,7 +7,7 @@ namespace DAL
 {
     public interface IDeliversDB
     {
-        List<Deliver> GetDelivers();
+        List<Deliver> GetDelivers(int id);
         Deliver GetDeliver(int id);
     }
 }

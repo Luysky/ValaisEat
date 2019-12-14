@@ -8,7 +8,9 @@ namespace BLL
     {
        
 
-        List<Deliver> GetDelivers();
+        List<Deliver> GetDelivers(int id);
         Deliver GetDeliver(int id);
+
+        int GetAvailableDeliver(int id);
     }
 }

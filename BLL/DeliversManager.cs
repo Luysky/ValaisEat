@@ -10,10 +10,12 @@ namespace BLL
     {
 
         private IDeliversDB DeliversDbObject { get; }
+        private IOrdersDB OrdersDbObject { get; }
 
-        public DeliversManager (IDeliversDB deliversDB)
+        public DeliversManager (IDeliversDB deliversDB, IOrdersDB ordersDb)
         {
             DeliversDbObject = deliversDB;
+            OrdersDbObject = ordersDb;
         }
 
         public Deliver GetDeliver(int id)
@@ -21,9 +23,39 @@ namespace BLL
             return DeliversDbObject.GetDeliver(id);
         }
 
-        public List<Deliver> GetDelivers()
+        public List<Deliver> GetDelivers(int id)
         {
-            return DeliversDbObject.GetDelivers();
+            return DeliversDbObject.GetDelivers(id);
+        }
+
+        public int GetAvailableDeliver(int id)
+        {
+            int idDeliver = 0;
+            int max = 5;
+
+            var all = GetDelivers(id);
+            foreach (var a in all)
+            {
+                var orders = OrdersDbObject.GetOrders(a.IdDeliver);
+                var count = orders.Count;
+                if (count < max)
+                {
+                    max = count;
+                    idDeliver = a.IdDeliver;
+                }
+
+            }
+
+            if (idDeliver == 0)
+            {
+                foreach (var a in all)
+                {
+                    if (idDeliver == 0)
+                        idDeliver = a.IdDeliver;
+                }
+            }
+           
+            return idDeliver;
         }
     }
 }

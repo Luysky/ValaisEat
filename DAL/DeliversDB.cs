@@ -17,7 +17,7 @@ namespace DAL
         }
         protected string connectionString = "Server=153.109.124.35;Database=ValaisEatDespair;User Id=6231db;Password=Pwd46231.;MultipleActiveResultSets=true";
 
-        public List<Deliver> GetDelivers()
+        public List<Deliver> GetDelivers(int id)
         {
             List<Deliver> results = null;
           
@@ -26,8 +26,9 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM Deliver";
+                    string query = "SELECT * FROM Deliver WHERE IdCity = @id";
                     SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@id", id);
 
                     cn.Open();
 
@@ -70,7 +71,7 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM Deliver WHERE idDeliver = @id";
+                    string query = "SELECT * FROM Deliver WHERE IdDeliver = @id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", id);
 

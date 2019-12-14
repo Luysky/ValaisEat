@@ -43,8 +43,7 @@ namespace WebApplication.Controllers
         {
             var newOrder = new Order();
             newOrder.IdCustomer = (int)HttpContext.Session.GetInt32("idCustomer");
-            newOrder.IdDeliver = 1;
-            // newOrder.IdDeliver = DeliverManager.GetAvailableDeliver((int)HttpContext.Session.GetInt32("idCustomer"));
+            newOrder.IdDeliver = 0;
             newOrder.OrderPrice = 0 ;
             newOrder.Status = "En cours de Commande";
 
@@ -56,7 +55,7 @@ namespace WebApplication.Controllers
         }
 
         // POST: Order/Create
-        [HttpPost]
+       /* [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
         {
@@ -70,16 +69,22 @@ namespace WebApplication.Controllers
             {
                 return View();
             }
-        }
+        }*/
 
         // GET: Order/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult ValidateOrder()
         {
+            var order = OrderManager.GetOrder((int)HttpContext.Session.GetInt32("idOrder"));
+            order.IdDeliver = DeliverManager.GetAvailableDeliver((int)HttpContext.Session.GetInt32("idCity"));
+            order.Status = "En cours de Livraison";
+
+            OrderManager.UpdateOrder(order);
+
             return View();
         }
 
         // POST: Order/Edit/5
-        [HttpPost]
+        /*[HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
         {
@@ -93,7 +98,7 @@ namespace WebApplication.Controllers
             {
                 return View();
             }
-        }
+        }*/
 
         // GET: Order/Delete/5
         public ActionResult Delete(int id)
@@ -127,6 +132,7 @@ namespace WebApplication.Controllers
                 if (results == null)
                     results = new List<OrderDetails>();
 
+               
                 var Details = new OrderDetails();
 
                 Details.IdOrder = o.IdOrder;
@@ -143,7 +149,10 @@ namespace WebApplication.Controllers
                 Details.Npa = city.Npa;
                 Details.City = city.Name;
 
+               
                 results.Add(Details);
+                
+                
             }
 
 

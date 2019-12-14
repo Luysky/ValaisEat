@@ -159,5 +159,13 @@ namespace WebApplication.Controllers
            return View(total);
         }
 
+        [HttpPost]
+        public IActionResult AffichePanier(List<Panier> paniers)
+        {
+
+            return RedirectToAction("ValidateOrder", "Order");
+        }
+
+        
     }
 }
