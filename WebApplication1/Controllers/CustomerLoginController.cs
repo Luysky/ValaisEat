@@ -124,5 +124,11 @@ namespace WebApplication.Controllers
 
 
         }
+
+        public ActionResult LogOutC()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home"); 
+        }
     }
 }

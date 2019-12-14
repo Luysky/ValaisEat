@@ -31,9 +31,9 @@ namespace BLL
             OrderDishesDbObject.DeleteOrderDish(idOrder, idDish);
         }
 
-        public OrderDish GetOrderDish(int id)
+        public OrderDish GetOrderDish(int idOrder, int idDish)
         {
-            return OrderDishesDbObject.GetOrderDish(id);
+            return OrderDishesDbObject.GetOrderDish(idOrder, idDish);
         }
 
         public List<OrderDish> GetOrderDishes(int id)

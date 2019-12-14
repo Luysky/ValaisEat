@@ -61,7 +61,7 @@ namespace DAL
             return results;
         }
 
-        public OrderDish GetOrderDish(int id)
+        public OrderDish GetOrderDish(int idOrder, int idDish)
         {
             OrderDish orderDish = null;
             
@@ -70,9 +70,10 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT * FROM OrderDish WHERE IdOrder = @id";
+                    string query = "SELECT * FROM OrderDish WHERE IdOrder = @idOrder AND IdDish = @idDish";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@idOrder", idOrder);
+                    cmd.Parameters.AddWithValue("@idDish", idDish);
 
                     cn.Open();
 

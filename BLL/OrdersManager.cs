@@ -38,7 +38,7 @@ namespace BLL
             var orders = OrdersDbObject.GetOrders(id);
             foreach (var o in orders)
             {
-                if (o.Status != "En cours de Livraison")
+                if (o.Status != "Deliver in Progress")
                     orders.Remove(o);
             }
 

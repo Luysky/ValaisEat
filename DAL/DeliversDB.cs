@@ -43,7 +43,7 @@ namespace DAL
 
                             delivers.IdDeliver = (int)dr["IdDeliver"];
                             delivers.Name = (string)dr["Name"];
-                            delivers.PhoneNumber = (int)dr["PhoneNumber"];
+                            delivers.PhoneNumber = (string)dr["PhoneNumber"];
                             delivers.IdCity = (int)dr["IdCity"];
 
 
@@ -85,7 +85,7 @@ namespace DAL
 
                             deliver.IdDeliver = (int)dr["IdDeliver"];
                             deliver.Name = (string)dr["Name"];
-                            deliver.PhoneNumber = (int)dr["PhoneNumber"];
+                            deliver.PhoneNumber = (string)dr["PhoneNumber"];
                             deliver.IdCity = (int)dr["IdCity"];
                           
                             

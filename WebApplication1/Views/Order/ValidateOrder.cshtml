@@ -1,0 +1,22 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ValidateOrder</title>
+</head>
+
+<h1>MERCI DE VOTRE COMMANDE !</h1>
+<h3> Votre commande N° <strong>@ViewBag.IdOrder</strong>arrivera dans Approximativement <strong>@ViewBag.deliverTime</strong> minutes </h3>
+<body>
+
+    <div>
+        <a asp-controller="CustomerLogin" asp-action="LogOutC">Back to Menu</a>
+    </div>
+</body>
+</html>

@@ -30,11 +30,6 @@ namespace WebApplication.Controllers
             return View();
         }
 
-        // GET: OrderDish/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
         // GET: OrderDish/Create
         public ActionResult Create(int id)
@@ -47,11 +42,30 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(int id, OrderDish od)
         {
+            var dish = DishesManager.GetDish(id);
+            od.OrderDishPrice = dish.DishPrice;
 
-                var creation = new OrderDish();
+            int idOrder = (int)HttpContext.Session.GetInt32("idOrder");
+            var test = OrderDishManager.GetOrderDishes(idOrder);
+            if (test != null)
+            {
+                 foreach (var t in test)
+                 {
+                       if (t.IdDish == od.IdDish)
+                       {
+                            return RedirectToAction("Update",od);
+                       }
+                  }
+             }
+            
 
-                creation.IdOrder = (int)HttpContext.Session.GetInt32("idOrder");
-                creation.IdDish = id;
+
+            var creation = new OrderDish();
+                
+            creation.IdOrder = idOrder;
+            creation.IdDish = id;
+
+           
 
             if (od.Quantity > 0  && od.Quantity<=20)
                 creation.Quantity = od.Quantity;
@@ -63,8 +77,6 @@ namespace WebApplication.Controllers
            
                 
 
-                var dish = DishesManager.GetDish(id);
-
                 creation.OrderDishPrice = dish.DishPrice * creation.Quantity;
 
                 OrderDishManager.AddOrderDish(creation);
@@ -74,9 +86,21 @@ namespace WebApplication.Controllers
         }
 
         // GET: OrderDish/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Update(OrderDish orderDish)
         {
-            return View();
+
+            var orderdishDb = OrderDishManager.GetOrderDish(orderDish.IdDish, orderDish.IdOrder);
+            if (orderdishDb.Quantity + orderDish.Quantity < 0 || orderdishDb.Quantity + orderDish.Quantity > 20)
+            {
+                ViewData["Message"] = "La Quantité doit être entre 1 et 20 !";
+                return View("Create");
+            }
+            orderdishDb.Quantity += orderDish.Quantity;
+            orderdishDb.OrderDishPrice = orderDish.OrderDishPrice * orderDish.Quantity;
+            OrderDishManager.UpdateOrderDish(orderdishDb);
+
+            return RedirectToAction("GetAllDishes", "Dish");
+
         }
 
         // POST: OrderDish/Edit/5

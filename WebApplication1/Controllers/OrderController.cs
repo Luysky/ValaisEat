@@ -33,9 +33,12 @@ namespace WebApplication.Controllers
         }
 
         // GET: Order/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Archive(int id)
         {
-            return View();
+            var order = OrderManager.GetOrder(id);
+            order.Status = "Delivered";
+            
+            return View("GetAllOrdersDeliver");
         }
 
         // GET: Order/Create
@@ -45,7 +48,7 @@ namespace WebApplication.Controllers
             newOrder.IdCustomer = (int)HttpContext.Session.GetInt32("idCustomer");
             newOrder.IdDeliver = 0;
             newOrder.OrderPrice = 0 ;
-            newOrder.Status = "En cours de Commande";
+            newOrder.Status = "Order in Progress";
 
             var creation = OrderManager.AddOrder(newOrder);
 
@@ -54,51 +57,32 @@ namespace WebApplication.Controllers
             return RedirectToAction("GetAllCities", "City");
         }
 
-        // POST: Order/Create
-       /* [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }*/
-
-        // GET: Order/Edit/5
+   
         public ActionResult ValidateOrder()
         {
             var order = OrderManager.GetOrder((int)HttpContext.Session.GetInt32("idOrder"));
             order.IdDeliver = DeliverManager.GetAvailableDeliver((int)HttpContext.Session.GetInt32("idCity"));
-            order.Status = "En cours de Livraison";
+            order.Status = "Deliver in Progress";
 
             OrderManager.UpdateOrder(order);
+            int count = 1;
+            var orders = OrderManager.GetOrders(order.IdDeliver);
+            foreach (var o in orders)
+            {
+                if (o.IdOrder == order.IdOrder)
+                {
+                    ViewBag.deliverTime = 10 * count;
+                }
+                else
+                {
+                    count++;
+                }
+            }
+            ViewBag.IdOrder = order.IdOrder;
+           
 
             return View();
         }
-
-        // POST: Order/Edit/5
-        /*[HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }*/
 
         // GET: Order/Delete/5
         public ActionResult Delete(int id)

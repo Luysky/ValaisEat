@@ -36,13 +36,24 @@ namespace BLL
             var all = GetDelivers(id);
             foreach (var a in all)
             {
-                var orders = OrdersDbObject.GetOrders(a.IdDeliver);
-                var count = orders.Count;
-                if (count < max)
+                if (a.IdDeliver == 0)
                 {
-                    max = count;
-                    idDeliver = a.IdDeliver;
+                    all.Remove(a);
                 }
+
+                var orders = OrdersDbObject.GetOrders(a.IdDeliver);
+                if (orders != null)
+                {
+                    var count = orders.Count;
+                    if (count < max)
+                    {
+                        max = count;
+                        idDeliver = a.IdDeliver;
+                    }
+                }
+                else
+                    idDeliver = a.IdDeliver;
+              
 
             }
 
