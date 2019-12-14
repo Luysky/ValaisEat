@@ -37,10 +37,10 @@ namespace WebApplication.Controllers
         {
             var order = OrderManager.GetOrder(id);
             order.Status = "Delivered";
-            
-            return View("GetAllOrdersDeliver");
-        }
+            OrderManager.UpdateOrder(order);
 
+            return RedirectToAction("GetAllOrdersDeliver");
+        }
         // GET: Order/Create
         public ActionResult CreateOrder()
         {
@@ -125,8 +125,8 @@ namespace WebApplication.Controllers
 
                 var customer = CustomerManager.GetCustomer(o.IdCustomer);
 
-                Details.CustomerName = customer.Name;
-                Details.CustumerAdress = customer.Adresse;
+                Details.CustomerName = customer.Name + customer.Firstname;
+                Details.CustumerAdress = customer.Adress;
 
                 var city = CitiesManager.GetCity(customer.IdCity);
 

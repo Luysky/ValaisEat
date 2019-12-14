@@ -22,7 +22,6 @@ namespace DAL
         {
             List<Customer> results = null;
             
-
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
@@ -43,7 +42,8 @@ namespace DAL
 
                             customers.IdCustomer = (int)dr["IdCustomer"];
                             customers.Name = (string)dr["Name"];
-                            customers.Adresse = (string)dr["Adresse"];
+                            customers.Firstname = (string)dr["Firstname"];
+                            customers.Adress = (string)dr["Adress"];
                             customers.IdCity = (int)dr["IdCity"];
 
 
@@ -85,7 +85,8 @@ namespace DAL
 
                             customer.IdCustomer = (int)dr["IdCustomer"];
                             customer.Name = (string)dr["Name"];
-                            customer.Adresse = (string)dr["Adresse"];
+                            customer.Firstname = (string)dr["Firstname"];
+                            customer.Adress = (string)dr["Adress"];
                             customer.IdCity = (int)dr["IdCity"];
                         }
                     }
@@ -106,10 +107,11 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "INSERT INTO Customer(Name, Adresse, Idcity) VALUES(@name, @adresse, @idcity); SELECT SCOPE_IDENTITY()";
+                    string query = "INSERT INTO Customer(Name,Firstname, Adresse, Idcity) VALUES(@name,@firstname, @adresse, @idcity); SELECT SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@name", customer.Name);
-                    cmd.Parameters.AddWithValue("@adresse", customer.Adresse);
+                    cmd.Parameters.AddWithValue("@firstname", customer.Firstname);
+                    cmd.Parameters.AddWithValue("@adresse", customer.Adress);
                     cmd.Parameters.AddWithValue("@idcity", customer.IdCity);
 
 
@@ -135,39 +137,14 @@ namespace DAL
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "UPDATE Customer SET Name=@name, Adresse=@adresse, Idcity=@idcity  WHERE IdCustomer=@id";
+                    string query = "UPDATE Customer SET Name=@name, Firstname=@firstname, Adresse=@adresse, Idcity=@idcity  WHERE IdCustomer=@id";
                     SqlCommand cmd = new SqlCommand(query, cn);
                     cmd.Parameters.AddWithValue("@id", customer.IdCustomer);
                     cmd.Parameters.AddWithValue("@name", customer.Name);
-                    cmd.Parameters.AddWithValue("@adresse", customer.Adresse);
+                    cmd.Parameters.AddWithValue("@firstname", customer.Firstname);
+                    cmd.Parameters.AddWithValue("@adresse", customer.Adress);
                     cmd.Parameters.AddWithValue("@idcity", customer.IdCity);
 
-
-                    cn.Open();
-
-                    result = cmd.ExecuteNonQuery();
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return result;
-        }
-
-        public int DeleteCustomer(int id)
-        {
-            int result = 0;
-           
-
-            try
-            {
-                using (SqlConnection cn = new SqlConnection(connectionString))
-                {
-                    string query = "DELETE FROM Customer WHERE IdCustomer=@id";
-                    SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@id", id);
 
                     cn.Open();
 

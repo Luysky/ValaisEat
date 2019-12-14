@@ -22,10 +22,6 @@ namespace BLL
            return CustomersDbObject.AddCustomer(customer);
         }
 
-        public int DeleteCustomer(int id)
-        {
-            return CustomersDbObject.DeleteCustomer(id);
-        }
 
         public Customer GetCustomer(int id)
         {

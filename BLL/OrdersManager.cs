@@ -36,13 +36,15 @@ namespace BLL
         public List<Order> GetOrders(int id)
         {
             var orders = OrdersDbObject.GetOrders(id);
+            var finalOrders = new List<Order>();
             foreach (var o in orders)
             {
-                if (o.Status != "Deliver in Progress")
-                    orders.Remove(o);
+                if (o.Status == "Deliver in Progress")
+                    finalOrders.Add(o);
             }
 
-            return orders;
+            return finalOrders;
+            
         }
 
         public int UpdateOrder(Order order)
