@@ -179,31 +179,27 @@ namespace DAL
 
             return result;
         }
-        public int DeleteOrderDish(int idOrder, int idDish)
+        public void DeleteOrderDish(int idOrder, int idDish)
         {
-            int result = 0;
    
-
             try
             {
                 using (SqlConnection cn = new SqlConnection(connectionString))
                 {
-                    string query = "DELETE FROM OrderDish WHERE IdOrder=@idIdOrder AND IdDish=@IdDish";
+                    string query = "DELETE FROM OrderDish WHERE IdOrder=@IdOrder AND IdDish=@IdDish";
                     SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@idIdOrder", idOrder);
+                    cmd.Parameters.AddWithValue("@IdOrder", idOrder);
                     cmd.Parameters.AddWithValue("@IdDish", idDish);
 
                     cn.Open();
 
-                    result = cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
                 }
             }
             catch (Exception e)
             {
                 throw e;
             }
-
-            return result;
         }
 
     }

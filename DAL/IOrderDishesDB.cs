@@ -13,6 +13,6 @@ namespace DAL
 
         int UpdateOrderDish(OrderDish orderDish);
         int DeleteOrderDish(int id);
-        int DeleteOrderDish(int idOrder, int idDish);
+        void DeleteOrderDish(int idOrder, int idDish);
     }
 }

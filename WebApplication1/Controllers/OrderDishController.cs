@@ -97,9 +97,12 @@ namespace WebApplication.Controllers
         }
 
         // GET: OrderDish/Delete/5
-        public ActionResult Delete(int idDish, int idOrder)
+        public ActionResult Delete(int idProd, int idOrder)
         {
-            OrderDishManager.DeleteOrderDish(idOrder, idDish);
+            OrderDishManager.DeleteOrderDish(idOrder, idProd);
+            var prixTotal = OrderManager.GetOrder((int)HttpContext.Session.GetInt32("idOrder"));
+            prixTotal.OrderPrice = 0;
+            OrderManager.UpdateOrder(prixTotal);
             return RedirectToAction("AffichePanier");
         }
 
@@ -110,7 +113,7 @@ namespace WebApplication.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
+               
 
                 return RedirectToAction(nameof(Index));
             }
@@ -122,8 +125,12 @@ namespace WebApplication.Controllers
 
         public IActionResult AffichePanier()
         {
+           
             var panier = OrderDishManager.GetOrderDishes((int)HttpContext.Session.GetInt32("idOrder"));
+
             List<Panier> total = new List<Panier>();
+
+           
             var prixTotal = OrderManager.GetOrder((int)HttpContext.Session.GetInt32("idOrder"));
 
             foreach (var p in panier)
@@ -131,13 +138,17 @@ namespace WebApplication.Controllers
                 Panier article = new Panier();
                 var dish = DishesManager.GetDish(p.IdDish);
                 article.OrderId = p.IdOrder;
-                article.ProductId = dish.IdDish;
+                article.ProductId = p.IdDish;
                 article.ProductName = dish.Name;
                 article.Quantity = p.Quantity;
                 article.TotalPrice = p.OrderDishPrice;
 
                 total.Add(article);
+
+               
                 prixTotal.OrderPrice += article.TotalPrice;
+               
+               
             }
 
             double prix = (double)prixTotal.OrderPrice;
