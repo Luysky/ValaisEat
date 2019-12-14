@@ -18,11 +18,6 @@ namespace BLL
             OrdersDbObject = ordersDb;
         }
 
-        public Deliver GetDeliver(int id)
-        {
-            return DeliversDbObject.GetDeliver(id);
-        }
-
         public List<Deliver> GetDelivers(int id)
         {
             return DeliversDbObject.GetDelivers(id);

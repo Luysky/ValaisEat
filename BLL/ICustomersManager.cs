@@ -8,10 +8,8 @@ namespace BLL
     {
         
 
-        List<Customer> GetCustomers();
         Customer GetCustomer(int id);
-        Customer AddCustomer(Customer customer);
-        int UpdateCustomer(Customer customer);
+        
 
     }
 }

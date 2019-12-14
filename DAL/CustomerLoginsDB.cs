@@ -60,44 +60,7 @@ namespace DAL
             return results;
         }
 
-        public CustomerLogin GetCustomerLogin(int id)
-        {
-            CustomerLogin login = null;
-
-
-            try
-            {
-                using (SqlConnection cn = new SqlConnection(connectionString))
-                {
-                    string query = "SELECT * FROM CustomerLogin WHERE IdCustomer = @id";
-                    SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@id", id);
-
-                    cn.Open();
-
-                    using (SqlDataReader dr = cmd.ExecuteReader())
-                    {
-                        if (dr.Read())
-                        {
-                            login = new CustomerLogin();
-
-                            login.IdLogin = (int)dr["IdLogin"];
-                            login.IdCustomer = (int)dr["IdCustomer"];
-                            login.Email = (string)dr["Email"];
-                            login.Password = (string)dr["Password"];
-
-                        }
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return login;
-        }
-
+        
         public int IsUserValid(string email, string password)
         {
             var logins = GetCustomerLogins();

@@ -15,10 +15,6 @@ namespace BLL
         {
             DeliverLoginsDbObject = deliverLogins;
         }
-        public DeliverLogin GetDeliverLogin(int id)
-        {
-            return DeliverLoginsDbObject.GetDeliverLogin(id);
-        }
 
         public List<DeliverLogin> GetDeliverLogins()
         {

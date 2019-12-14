@@ -43,7 +43,8 @@ namespace DAL
                             cities.IdCity = (int)dr["IdCity"];
                             cities.Name = (string)dr["Name"];
                             cities.Npa = (int)dr["Npa"];
-                            cities.IdArea = (int)dr["IdArea"];
+                            cities.IdCountry = (int)dr["IdCountry"];
+                            
 
 
                             results.Add(cities);
@@ -83,7 +84,8 @@ namespace DAL
                             city.IdCity = (int)dr["IdCity"];
                             city.Name = (string)dr["Name"];
                             city.Npa = (int)dr["Npa"];
-                            city.IdArea = (int)dr["IdArea"];
+                            city.IdCountry = (int)dr["IdCountry"];
+
                         }
                     }
                 }
@@ -94,90 +96,6 @@ namespace DAL
             }
 
             return city;
-        }
-
-        public City AddCity(City city)
-        {
-           
-
-            try
-            {
-                using (SqlConnection cn = new SqlConnection(connectionString))
-                {
-                    string query = "INSERT INTO City(Name, Npa, IdArea) VALUES(@name, @npa, @idArea); SELECT SCOPE_IDENTITY()";
-                    SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@name", city.Name);
-                    cmd.Parameters.AddWithValue("@npa", city.Npa);
-                    cmd.Parameters.AddWithValue("@idArea", city.IdArea);
-
-
-                    cn.Open();
-
-                    city.IdCity = Convert.ToInt32(cmd.ExecuteScalar());
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return city;
-        }
-
-        public int UpdateCity(City city)
-        {
-            int result = 0;
-            
-
-            try
-            {
-                using (SqlConnection cn = new SqlConnection(connectionString))
-                {
-                    string query = "UPDATE City SET Name=@name, Npa=@npa, IdArea=@idArea  WHERE IdCity=@id";
-                    SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@id", city.IdCity);
-                    cmd.Parameters.AddWithValue("@name", city.Name);
-                    cmd.Parameters.AddWithValue("@npa", city.Npa);
-                    cmd.Parameters.AddWithValue("@idArea", city.IdArea);
-
-
-                    cn.Open();
-
-                    result = cmd.ExecuteNonQuery();
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return result;
-        }
-
-        public int DeleteCity(int id)
-        {
-            int result = 0;
-           
-
-            try
-            {
-                using (SqlConnection cn = new SqlConnection(connectionString))
-                {
-                    string query = "DELETE FROM City WHERE IdCity=@id";
-                    SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@id", id);
-
-                    cn.Open();
-
-                    result = cmd.ExecuteNonQuery();
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return result;
         }
     }
 }

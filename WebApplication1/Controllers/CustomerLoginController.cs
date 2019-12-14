@@ -13,91 +13,20 @@ namespace WebApplication.Controllers
     {
 
         private ICustomerLoginsManager CustomerLoginManager { get; }
-        public CustomerLoginController(ICustomerLoginsManager customerloginsManager)
+        private IOrdersManager OrdersManager { get; }
+        private IOrderDishesManager OrderDishesManager { get; }
+        public CustomerLoginController(ICustomerLoginsManager customerloginsManager, IOrdersManager ordersManager, IOrderDishesManager orderDishesManager)
         {
             CustomerLoginManager = customerloginsManager;
-        }
+            OrdersManager = ordersManager;
+            OrderDishesManager = orderDishesManager;        }
 
         // GET: CustomerLogin
         public ActionResult Index()
         {
             return View();
         }
-
-        // GET: CustomerLogin/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: CustomerLogin/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: CustomerLogin/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: CustomerLogin/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: CustomerLogin/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: CustomerLogin/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: CustomerLogin/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+   
 
         public ActionResult LoginC()
         {
@@ -127,7 +56,15 @@ namespace WebApplication.Controllers
 
         public ActionResult LogOutC()
         {
+            var testOrder = OrdersManager.GetOrder((int)HttpContext.Session.GetInt32("idOrder"));
+            if (testOrder.Status == "Order in Progress")
+            {
+                OrderDishesManager.DeleteOrderDish(testOrder.IdOrder);
+                OrdersManager.DeleteOrder(testOrder.IdOrder);
+               
+            }
             HttpContext.Session.Clear();
+            
             return RedirectToAction("Index", "Home"); 
         }
     }

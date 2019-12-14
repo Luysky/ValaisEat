@@ -60,44 +60,6 @@ namespace DAL
             return results;
         }
 
-        public DeliverLogin GetDeliverLogin(int id)
-        {
-            DeliverLogin login = null;
-
-
-            try
-            {
-                using (SqlConnection cn = new SqlConnection(connectionString))
-                {
-                    string query = "SELECT * FROM DeliverLogin WHERE IdDeliver = @id";
-                    SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@id", id);
-
-                    cn.Open();
-
-                    using (SqlDataReader dr = cmd.ExecuteReader())
-                    {
-                        if (dr.Read())
-                        {
-                            login = new DeliverLogin();
-
-                            login.IdLogin = (int)dr["IdLogin"];
-                            login.IdDeliver = (int)dr["IdDeliver"];
-                            login.Email = (string)dr["Email"];
-                            login.Password = (string)dr["Password"];
-
-                        }
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return login;
-        }
-
         public int IsUserValid(string email, string password)
         {
             var logins = GetDeliverLogins();

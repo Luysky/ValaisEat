@@ -18,16 +18,7 @@ namespace BLL
             DishesDbObject = dishesDB;
         }
 
-        public Dish AddDish(Dish dish)
-        {
-            return DishesDbObject.AddDish(dish);
-        }
-
-        public int DeleteDish(int id)
-        {
-            return DishesDbObject.DeleteDish(id);
-        }
-
+     
         public Dish GetDish(int id)
         {
             return DishesDbObject.GetDish(id);
@@ -38,9 +29,6 @@ namespace BLL
             return DishesDbObject.GetDishes(id);
         }
 
-        public int UpdateDish(Dish dish)
-        {
-            return DishesDbObject.UpdateDish(dish);
-        }
+     
     }
 }

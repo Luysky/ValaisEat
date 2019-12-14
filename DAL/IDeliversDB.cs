@@ -8,6 +8,5 @@ namespace DAL
     public interface IDeliversDB
     {
         List<Deliver> GetDelivers(int id);
-        Deliver GetDeliver(int id);
     }
 }

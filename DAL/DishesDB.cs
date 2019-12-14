@@ -64,7 +64,7 @@ namespace DAL
         public Dish GetDish(int id)
         {
             Dish dish = null;
-            
+
 
             try
             {
@@ -98,93 +98,6 @@ namespace DAL
             }
 
             return dish;
-        }
-
-        public Dish AddDish(Dish dish)
-        {
-            
-
-            try
-            {
-                using (SqlConnection cn = new SqlConnection(connectionString))
-                {
-                    string query = "INSERT INTO Dish(Name, DishPrice, Status, Idrestaurant) VALUES(@name, @dishPrice, @status, @idrestaurant); SELECT SCOPE_IDENTITY()";
-                    SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@name", dish.Name);
-                    cmd.Parameters.AddWithValue("@dishPrice", dish.DishPrice);
-                    cmd.Parameters.AddWithValue("@status", dish.Status);
-                    cmd.Parameters.AddWithValue("@idrestaurant", dish.IdRestaurant);
-                  
-
-
-                    cn.Open();
-
-                    dish.IdDish = Convert.ToInt32(cmd.ExecuteScalar());
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return dish;
-        }
-
-        public int UpdateDish(Dish dish)
-        {
-            int result = 0;
-           
-
-            try
-            {
-                using (SqlConnection cn = new SqlConnection(connectionString))
-                {
-                    string query = "UPDATE Dish SET Name=@name, DishPrice=@dishPrice, Status = @status, IdRestaurant=@idRestaurant WHERE IdDish=@id";
-                    SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@id", dish.IdDish);
-                    cmd.Parameters.AddWithValue("@name", dish.Name);
-                    cmd.Parameters.AddWithValue("@dishPrice", dish.DishPrice);
-                    cmd.Parameters.AddWithValue("@status", dish.Status);
-                    cmd.Parameters.AddWithValue("@idrestaurant", dish.IdRestaurant);
-
-
-                    cn.Open();
-
-                    result = cmd.ExecuteNonQuery();
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return result;
-        }
-
-        public int DeleteDish(int id)
-        {
-            int result = 0;
-         
-
-            try
-            {
-                using (SqlConnection cn = new SqlConnection(connectionString))
-                {
-                    string query = "DELETE FROM Dish WHERE IdDish=@id";
-                    SqlCommand cmd = new SqlCommand(query, cn);
-                    cmd.Parameters.AddWithValue("@id", id);
-
-                    cn.Open();
-
-                    result = cmd.ExecuteNonQuery();
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            return result;
         }
 
 

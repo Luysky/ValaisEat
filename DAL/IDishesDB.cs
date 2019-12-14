@@ -9,8 +9,5 @@ namespace DAL
     {
         List<Dish> GetDishes(int id);
         Dish GetDish(int id);
-        Dish AddDish(Dish dish);
-        int UpdateDish(Dish dish);
-        int DeleteDish(int id);
     }
 }

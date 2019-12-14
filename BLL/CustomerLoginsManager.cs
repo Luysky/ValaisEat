@@ -16,19 +16,6 @@ namespace BLL
             CustomerLoginsDbObject = customerLogins;
         }
 
-
-        public CustomerLogin GetCustomerLogin(int id)
-        {
-
-            return CustomerLoginsDbObject.GetCustomerLogin(id);
-        }
-
-        public List<CustomerLogin> GetCustomerLogins()
-        {
-            return CustomerLoginsDbObject.GetCustomerLogins();
-
-        }
-
         public int IsUserValid(string email, string password)
         {
             return CustomerLoginsDbObject.IsUserValid(email, password);
