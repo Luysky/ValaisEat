@@ -15,18 +15,13 @@ namespace WebApplication1.Controllers
         {
             DishManager = dishesManager;
         }
-        // GET: Dish
+   
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: Dish/Details/5
-        public ActionResult Add(int id)
-        {
-            return View();
-        }
-
+    
         public ActionResult GetAllDishes()
         {
             

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BLL;
+﻿using BLL;
 using DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -31,7 +27,7 @@ namespace WebApplication.Controllers
         public ActionResult LoginC()
         {
 
-            ViewData["Message"] = "Veuillez vous identifier";
+            ViewData["Message"] = "Identify yourself";
 
             return View();
         }
@@ -48,10 +44,10 @@ namespace WebApplication.Controllers
                 return RedirectToAction("CreateOrder", "Order");
             }
             else
-            return View();
-
-
-
+            {
+                ViewData["MessageError"] = "Email or Password incorrect, try again";
+                return View();
+            }
         }
 
         public ActionResult LogOutC()

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using BLL;
 using DTO;
 using Microsoft.AspNetCore.Http;
@@ -85,7 +82,7 @@ namespace WebApplication.Controllers
         }
 
         // GET: Order/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int id, string name, string firstname)
         {
             return View();
         }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using BLL;
 using DTO;
 using Microsoft.AspNetCore.Http;
@@ -75,8 +72,6 @@ namespace WebApplication.Controllers
                 return View();
             }
            
-                
-
                 creation.OrderDishPrice = dish.DishPrice * creation.Quantity;
 
                 OrderDishManager.AddOrderDish(creation);
@@ -103,23 +98,6 @@ namespace WebApplication.Controllers
 
         }
 
-        // POST: OrderDish/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
         // GET: OrderDish/Delete/5
         public ActionResult Delete(int idProd, int idOrder)
         {
@@ -128,23 +106,6 @@ namespace WebApplication.Controllers
             prixTotal.OrderPrice = 0;
             OrderManager.UpdateOrder(prixTotal);
             return RedirectToAction("AffichePanier");
-        }
-
-        // POST: OrderDish/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-               
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
 
         public IActionResult AffichePanier()

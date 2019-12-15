@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Text;
+
 
 namespace DAL
 {
@@ -43,6 +43,7 @@ namespace DAL
 
                             delivers.IdDeliver = (int)dr["IdDeliver"];
                             delivers.Name = (string)dr["Name"];
+                            delivers.Firstname = (string)dr["Firstname"];
                             delivers.PhoneNumber = (string)dr["PhoneNumber"];
                             delivers.IdCity = (int)dr["IdCity"];
 

@@ -33,6 +33,8 @@ namespace WebApplication1
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddSession();
+
             services.AddScoped<ICitiesManager, CitiesManager>();
             services.AddScoped<ICitiesDB, CitiesDB>();
 
