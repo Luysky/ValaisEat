@@ -27,6 +27,10 @@ namespace WebApplication1.Controllers
         public ActionResult GetAllRestaurants()
         {
             var restaurants = RestaurantsManager.GetRestaurants((int)HttpContext.Session.GetInt32("idCity"));
+            if (restaurants == null)
+                {
+                    return RedirectToAction("GetAllCities", "City");
+                }
 
             return View(restaurants);
         }

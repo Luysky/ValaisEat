@@ -140,7 +140,7 @@ namespace DAL
                     cmd.Parameters.AddWithValue("@id", orderDish.IdOrder);
                     cmd.Parameters.AddWithValue("@idDish", orderDish.IdDish);
                     cmd.Parameters.AddWithValue("@quantity", orderDish.Quantity);
-                    cmd.Parameters.AddWithValue("@orderDishesPrice", orderDish.OrderDishPrice);
+                    cmd.Parameters.AddWithValue("@orderDishPrice", orderDish.OrderDishPrice);
 
                     cn.Open();
 

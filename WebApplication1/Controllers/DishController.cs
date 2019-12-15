@@ -27,6 +27,10 @@ namespace WebApplication1.Controllers
             
             var dishes = DishManager.GetDishes((int)HttpContext.Session.GetInt32("idRestaurant"));
 
+            if(dishes==null)
+            {
+                return RedirectToAction("GetAllRestaurants", "Restaurant");
+            }
 
             return View(dishes);
         }
