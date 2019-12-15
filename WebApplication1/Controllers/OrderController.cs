@@ -82,7 +82,7 @@ namespace WebApplication.Controllers
         }
 
         // GET: Order/Delete/5
-        public ActionResult Delete(int id, string name, string firstname)
+        public ActionResult Delete()
         {
             return View();
         }
@@ -90,18 +90,44 @@ namespace WebApplication.Controllers
         // POST: Order/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(DeleteOrder deleteOrder)
         {
-            try
+            var order = OrderManager.GetOrder(deleteOrder.idOrder);
+            if (order == null)
             {
-                // TODO: Add delete logic here
+                ViewData["Message"] = "Invalid order's number";
+                return RedirectToAction("DeleteOrder", "Home");
+            }
+           bool result = CustomerManager.CheckCustomer(order.IdCustomer, deleteOrder.Name, deleteOrder.Firstname);
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
+            if (result == true)
             {
-                return View();
+                var orders = OrderManager.GetOrders(order.IdDeliver);
+                int count = 1;
+                foreach (var o in orders)
+                {
+                    if (o.IdOrder == order.IdOrder)
+                        break;
+                    else
+                        count++;
+                }
+                if (count == 1)
+                {
+                    ViewData["Message"] = "Your order will be delivered in less than 10 minutes, you can't delete it";
+                    return RedirectToAction("DeleteOrder", "Home");
+                }
+                else
+                {
+                    order.Status = "Deleted";
+                    OrderManager.UpdateOrder(order);
+                    return RedirectToAction("SuccessMessage");
+                }
+                    
             }
+
+            ViewData["Message"] = "The datas are incorrect, please try again";
+            return RedirectToAction("DeleteOrder", "Home");
+
         }
 
         public ActionResult GetAllOrdersDeliver()
@@ -138,6 +164,11 @@ namespace WebApplication.Controllers
 
 
             return View(results);
+        }
+
+        public ActionResult SuccessMessage()
+        {
+            return View();
         }
 
     }

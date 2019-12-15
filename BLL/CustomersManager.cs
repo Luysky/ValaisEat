@@ -22,6 +22,17 @@ namespace BLL
         {
             return CustomersDbObject.GetCustomer(id);
         }
+
+        public bool CheckCustomer(int idCustomer, string name, string firstname)
+        {
+            var customer = GetCustomer(idCustomer);
+
+            if (customer.Name == name && customer.Firstname == firstname)
+                return true;
+            else
+                return false;
+
+        }
     }
 
 }

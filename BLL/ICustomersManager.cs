@@ -9,7 +9,6 @@ namespace BLL
         
 
         Customer GetCustomer(int id);
-        
-
+        bool CheckCustomer(int idCustomer, string name, string firstname);
     }
 }

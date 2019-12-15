@@ -41,9 +41,6 @@ namespace WebApplication1.Controllers
 
         public IActionResult Customers() {
 
-            
-           ViewData["Message"] = "Veuillez vous identifier";
-
            return RedirectToAction("LoginC", "CustomerLogin");
 
 
@@ -52,12 +49,18 @@ namespace WebApplication1.Controllers
 
         public IActionResult Delivers()
         {
-            ViewData["Message"] = "Veuillez vous identifier";
-
+        
             return RedirectToAction("LoginD", "DeliverLogin");
 
         }
-     
+
+        public IActionResult DeleteOrder()
+        {
+          
+            return RedirectToAction("Delete", "Order");
+
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
